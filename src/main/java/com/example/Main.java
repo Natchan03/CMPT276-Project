@@ -49,13 +49,9 @@ public class Main {
     SpringApplication.run(Main.class, args);
   }
 
-  @RequestMapping("/{pageName}")
+  @RequestMapping("{pageName}")
   public String loadStaticPage(@PathVariable("pageName") String pageName) { 
-    if (pageName == "") {
-      return "index";
-    } else {
-      return pageName;
-    }
+    return pageName.isEmpty() ? "index" : pageName;
   }
 
   // PostMapping for signup form here
