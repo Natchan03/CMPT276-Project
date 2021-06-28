@@ -24,8 +24,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -51,14 +52,57 @@ public class Main {
 
   @RequestMapping("{pageName}")
   public String loadStaticPage(@PathVariable("pageName") String pageName) { 
+    System.out.println(pageName);
     return pageName.isEmpty() ? "index" : pageName;
   }
 
-  // PostMapping for signup form here
+  @GetMapping(
+    path = "/signup"
+  )
+  public String getSignupPage(Map<String, Object> model){
+    User user = new User();  
+    model.put("user", user);
+    return "signup";
+  }
 
+  @PostMapping(
+    path = "/user",
+    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
+  )
+  public String handleBrowserUserSubmit(Map<String, Object> model, User user) throws Exception {
+    
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+
+      // Create users table if not exists
+      String sql1 = "CREATE TABLE IF NOT EXISTS users " +
+      "(id serial, email varchar(40), password varchar(256), type varchar(20))";
+      System.out.println(sql1);
+      stmt.executeUpdate(sql1);
+
+      // Check whether the given user already exists. If so, fail the request
+      ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
+      if (rs.next()){
+        return "error";
+      }
+
+      // Hass the password
+      String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+
+      // Insert the new user to the table
+      String sql = "INSERT INTO users(email, password, type) VALUES ('" + user.getEmail() + "','" + hashed + "', 'regular')" ;
+      System.out.println(sql); 
+      stmt.executeUpdate(sql);
+
+      // Redirect backt to main page
+      return "redirect:/";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
 
   // PostMapping for login form here
-
 
   @Bean
   public DataSource dataSource() throws SQLException {

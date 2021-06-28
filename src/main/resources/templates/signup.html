@@ -3,12 +3,20 @@
 
 <head>
   <title>YouNote Sign-Up</title>
-  <div th:replace="fragments/common :: common&bootstrap"></div>
+  <th:block th:include="fragments/common :: common&bootstrap"></th:block>
 </head>
 
 <body>
   <nav th:replace="fragments/common :: navbar"></nav>
   <p>Test if signup page loaded</p>
+  
+  <!-- sample signup page -->
+  <form action="#" method="post" th:action="@{/user}" th:object="${user}">
+    <input class = "inputtype" type="text" id="email" th:field=*{email} placeholder="enter email"> <br>
+
+    <input class = "inputtype" type="password" id="password" th:field=*{password} placeholder="password"> <br>
+    <input class = "inputtype" type="submit" id="button" value="Submit"> 
+</form>
 </body>
 
 </html>
