@@ -8,15 +8,17 @@
 
 <body>
   <nav th:replace="fragments/common :: navbar"></nav>
-  <p>Test if signup page loaded</p>
-  
-  <!-- sample signup page -->
-  <form action="#" method="post" th:action="@{/user}" th:object="${user}">
-    <input class = "inputtype" type="text" id="email" th:field=*{email} placeholder="enter email"> <br>
+  <img src="../img/logo.png" alt="logo" class="logo">
+  <div style="background-color: #FF8B80; margin: auto; max-width: 500px; text-align: center; background-clip: content-box; border-radius: 150px / 55px; height: 250px;">
+    <h1 style="padding-top: 30px;">Log In</h1>
+    <form action="#" method="post" th:action="@{/user}" th:object="${user}">
+      <input class = "inputtype" type="text" id="email" th:field=*{email} placeholder="enter email"> <br>
 
-    <input class = "inputtype" type="password" id="password" th:field=*{password} placeholder="password"> <br>
-    <input class = "inputtype" type="submit" id="button" value="Submit"> 
-</form>
+      <input class = "inputtype" type="password" id="password" th:field=*{password} placeholder="password"> <br>
+      <input class = "inputtype" type="submit" id="button" value="Log In" style="margin-top: 10px">
+    </form>
+    <form action="/signup">Don't have an account yet? <input type = "submit" value="Sign Up"><br></form>
+  </div>
 </body>
-
 </html>
+
