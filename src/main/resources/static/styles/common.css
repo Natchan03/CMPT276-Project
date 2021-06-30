@@ -1,6 +1,8 @@
 /* CSS styles common to all HTML files */
 
 /* Test to see CSS is working properly */
-p {
-    color: red;
+
+.logo{
+    margin: auto;
+    horiz-align: center;
 }

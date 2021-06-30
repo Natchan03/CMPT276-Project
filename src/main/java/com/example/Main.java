@@ -86,7 +86,7 @@ public class Main {
         return "error";
       }
 
-      // Hass the password
+      // Hash the password
       String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 
       // Insert the new user to the table
@@ -94,12 +94,21 @@ public class Main {
       System.out.println(sql); 
       stmt.executeUpdate(sql);
 
-      // Redirect backt to main page
+      // Redirect back to main page
       return "redirect:/";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
+  }
+
+  @GetMapping(
+          path = "/login"
+  )
+  public String getLoginPage(Map<String, Object> model){
+    User user = new User();
+    model.put("user", user);
+    return "login";
   }
 
   // PostMapping for login form here
