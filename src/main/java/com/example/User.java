@@ -4,7 +4,7 @@ public class User {
     private long id;
     private String fname;
     private String lname;
-    private String username;
+    //private String username;
     private String email;
     private String password;
     private String type;
