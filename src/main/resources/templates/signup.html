@@ -9,9 +9,12 @@
 <body>
   <nav th:replace="fragments/common :: navbar"></nav>
   <img src="../img/logo.png" alt="logo" class="logo" height="80px" width="300px">
-  <div style="background-color: #FF8B80; margin: auto; max-width: 500px; text-align: center; background-clip: content-box; border-radius: 150px / 55px; height: 250px;">
+  <div style="background-color: #FF8B80; margin: auto; max-width: 500px; text-align: center; background-clip: content-box; border-radius: 150px / 55px; height: 290px;">
     <h1 style="padding-top: 30px;">Create a YouNote account</h1>
     <form action="#" method="post" th:action="@{/user}" th:object="${user}">
+      <input class = "inputtype" type="text" id="newfname" th:field=*{fname} placeholder="enter your first name"> 
+      <input class = "inputtype" type="text" id="newlname" th:field=*{lname} placeholder="enter your last name"> <br> 
+      <br>
       <input class = "inputtype" type="text" id="newemail" th:field=*{email} placeholder="enter email"> <br> 
       <input class = "inputtype" type="password" id="newpassword" th:field=*{password} placeholder="enter password"> <br>
       <input class = "inputtype" type="submit" id="newbutton" value="Create my account" style="margin-top: 10px"> <br>

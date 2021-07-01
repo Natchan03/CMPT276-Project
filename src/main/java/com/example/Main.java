@@ -56,7 +56,9 @@ public class Main {
     return pageName.isEmpty() ? "index" : pageName;
   }
 
-  @GetMapping(path = "/signup")
+  @GetMapping(
+    path = "/signup"
+  )
   public String getSignupPage(Map<String, Object> model){
     User user = new User();  
     model.put("user", user);
@@ -74,7 +76,7 @@ public class Main {
 
       // Create users table if not exists
       String sql1 = "CREATE TABLE IF NOT EXISTS users " +
-      "(id serial, email varchar(40), password varchar(256), type varchar(20))";
+      "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
       System.out.println(sql1);
       stmt.executeUpdate(sql1);
 
@@ -88,7 +90,7 @@ public class Main {
       String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 
       // Insert the new user to the table
-      String sql = "INSERT INTO users(email, password, type) VALUES ('" + user.getEmail() + "','" + hashed + "', 'regular')" ;
+      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','" + user.getLname() +"','" + user.getEmail() + "','" + hashed + "', 'regular')" ;// shouldnt 'regular' be user.getType()? - simar
       System.out.println(sql); 
       stmt.executeUpdate(sql);
 
