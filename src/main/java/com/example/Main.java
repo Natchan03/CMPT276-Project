@@ -56,9 +56,7 @@ public class Main {
     return pageName.isEmpty() ? "index" : pageName;
   }
 
-  @GetMapping(
-    path = "/signup"
-  )
+  @GetMapping(path = "/signup")
   public String getSignupPage(Map<String, Object> model){
     User user = new User();  
     model.put("user", user);
