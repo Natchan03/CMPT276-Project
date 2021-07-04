@@ -113,6 +113,14 @@ public class Main {
 
   // PostMapping for login form here
 
+  @PostMapping(
+          path="/login"
+  )
+  public String userLogin(Map<String, Object> model, User user){
+
+    return "login";
+  }
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
