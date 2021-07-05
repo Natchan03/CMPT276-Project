@@ -50,6 +50,7 @@ public class Main {
     SpringApplication.run(Main.class, args);
   }
 
+  // Loads each static page corresponding to its page name
   @RequestMapping("{pageName}")
   public String loadStaticPage(@PathVariable("pageName") String pageName) { 
     System.out.println(pageName);
@@ -60,7 +61,7 @@ public class Main {
     path = "/signup"
   )
   public String getSignupPage(Map<String, Object> model){
-    User user = new User();  
+    User user = new User();
     model.put("user", user);
     return "signup";
   }
@@ -91,7 +92,7 @@ public class Main {
 
       // Insert the new user to the table
       String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','" + user.getLname() +"','" + user.getEmail() + "','" + hashed + "', 'regular')" ;// shouldnt 'regular' be user.getType()? - simar
-      System.out.println(sql); 
+      System.out.println(sql);
       stmt.executeUpdate(sql);
 
       // Redirect back to main page
@@ -111,14 +112,27 @@ public class Main {
     return "login";
   }
 
-  // PostMapping for login form here
-
+  // Checks if submitted login info is valid
   @PostMapping(
-          path="/login"
+    path = "/login",
+    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
   )
-  public String userLogin(Map<String, Object> model, User user){
+  public String authenicateLogin(Map<String, Object> model, User user) throws Exception {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
 
-    return "login";
+      // Checks if the given email and hashed password combination is in the table
+      ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
+      if (rs.next() && BCrypt.checkpw(user.getPassword(), rs.getString("password"))) {
+          System.out.println("Logging in to " + user.getEmail());
+          return "redirect:/";
+      }
+      System.out.println("Invalid user and password combination");
+      return "redirect:/login";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
   }
 
   @Bean
@@ -131,5 +145,4 @@ public class Main {
       return new HikariDataSource(config);
     }
   }
-
 }
