@@ -4,10 +4,39 @@
 <head>
   <title>YouNote</title>
   <th:block th:include="fragments/common :: common&bootstrap"></th:block>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
+    <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}" defer></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
+    <script th:src="@{/scripts/common.js}" defer></script>
 </head>
 
 <body>
   <nav th:replace="fragments/common :: navbar"></nav>
-  <p>Test if main page loaded</p>
+  <div id="wrapper">
+    <div>
+           <img width='400px' height='250px' src='static/img/logo.png'/>
+           <h1 class="You Note"></h1>
+    
+    </div>
+    
+    <p>More...</p>
+      
+        <nav>
+            <b class="links" ><i><a href="login.html">Login</a></i></b>
+            <b class="links" ><i><a href= "signup.html">SignUp</a></i></b>
+            <b class="links"><i><a href="Notes.html">Notes</a></i></b>
+            <b class="links"><i><a href="Comments.html">Comments</a></i></b>
+        </nav>
+    
+        <p class = "para">
+            Introduction:<br>
+            YouNote is a App which allows you to take notes while watching videos. You are required to 
+            signup and then you could login into your account. In your account you will be given a textbox
+            to enter the link of the video for which you want to take note ....
+        </p>
+
+  <iframe width="100%" height="400" src="https://www.youtube.com/embed/UVuRSAmh3OI" frameborder="0" allowfullscreen></iframe>
 </body>
 </html>

@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String password;
     private String type;
+    private String resetPassword;
 
     // Getters
     public long getId() {
@@ -37,7 +38,10 @@ public class User {
     public String getType() {
         return this.type;
     }
-
+    
+    public String resetPasswordToken(){
+        return this.resetPassword;
+    }
     // Setters
     public void setId(long newId) {
         this.id = newId;
