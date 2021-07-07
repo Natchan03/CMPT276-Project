@@ -2,7 +2,11 @@
 
 /* Test to see CSS is working properly */
 
-.logo{
-    margin: auto;
-    horiz-align: center;
+#footerid{
+    background: black;
+    color:white; 
+    position:fixed; 
+    left:0; 
+    bottom:0; 
+    width:100%;
 }
