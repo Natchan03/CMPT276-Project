@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<h1 class="comment">Comments</h1>
-<form action="page.html">
-  <p>You are:</p>
-  <label for="male">Male</label>
-  <input type="radio" name="gender" id="male" value="male"><br>
-  <label for="female">Female</label>
-  <input type="radio" name="gender" id="female" value="female"><br>
-  <label for="other">Other</label>
-  <input type="radio" name="gender" id="other" value="other"><br><br>
- <p> First name: <p>
- <input type="text" name="fname"><br>
- <p> Last name:</p>
-  <input type="text" name="lname"><br>
-
-
-<fieldset>
-  <legend>Comments:</legend>
-  <p> If you have ay suggestions enter here:</p> <input type="text"><br>
- </fieldset>
- <input type="submit" value="Submit">
-
-</form>
-</body>
+  <head>
+    <title>YouNote Notes</title>
+    <th:block th:include="fragments/common :: common&bootstrap"></th:block>
+  </head>
+  <body>
+    <div style=" margin: auto; max-width: 750px; text-align: center; height: 500px;">
+      <br> <h1 class="comment">User Feedback </h1>
+      <form action="/index">
+        <p>Your feedback will help us improve YouNotes and provide our users the best note taking experience. </p>
+        <p>Please enter yout first and last name.</p>
+        <!-- <label for="male">Male</label>
+        <input type="radio" name="gender" id="male" value="male"><br>
+        <label for="female">Female</label>
+        <input type="radio" name="gender" id="female" value="female"><br>
+        <label for="other">Other</label>
+        <input type="radio" name="gender" id="other" value="other"><br><br> -->
+        <input type="text" name="fname" placeholder="firstname"><br>
+        <input type="text" name="lname" placeholder="lastname"><br>
+      
+       <br> <p> If you have any suggestions, please type them below:</p>
+      
+    
+        <textarea class="form-control" ></textarea>
+        <br>
+       <form action="/index">Submit and return to Home    <input type = "submit" value="Submit Feedback"></form>
+      </form>
+    </div>
+  </body>
 </html>
