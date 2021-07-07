@@ -16,7 +16,7 @@
     <nav th:replace="fragments/common :: navbar"></nav>
                 <input type="text" style=" width: 600px" placeholder="Enter YouTube video URL" >
                 <button onclick="loadVideo()">Load Video</button>
-                <iframe id="getvideo"></iframe>
+                <iframe id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            <br><br>
             <div id="summernote"><p>Enter notes here</p></div>
             <script>
