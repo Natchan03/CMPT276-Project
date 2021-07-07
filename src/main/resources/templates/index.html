@@ -7,21 +7,13 @@
   </head>
   
 
-<body>
-  <nav th:replace="fragments/common :: navbar"></nav>
-  <p>Test if main page loaded</p>
+  <body>
+    <nav th:replace="fragments/common :: navbar"></nav>
+
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/7_e0b6-VewM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+    <footer th:replace="fragments/common :: foot"></footer> 
     
-        <p class = "para">
-            Introduction:<br>
-            YouNote is a App which allows you to take notes while watching videos. You are required to 
-            signup and then you could login into your account. In your account you will be given a textbox
-            to enter the link of the video for which you want to take note ....
-        </p>
-
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/7_e0b6-VewM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      
-        <footer th:replace="fragments/common :: foot"></footer> 
-
-      </body>
+  </body>
 
 </html>
