@@ -1,32 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>YouNote</title>
-  <th:block th:include="fragments/common :: common&bootstrap"></th:block>
-  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/styles/common.css"/>
-    <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
-    <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}" defer></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
-    <script th:src="@{/scripts/common.js}" defer></script>
-</head>
+  <head>
+    <title>YouNote</title>
+    <th:block th:include="fragments/common :: common&bootstrap"></th:block>
+  </head>
+  
 
 <body>
   <nav th:replace="fragments/common :: navbar"></nav>
-  <div id="wrapper">
-    <div>
-           <img width='400px' height='250px' src='static/img/logo.png'/>
-           <h1 class="You Note"></h1>
-    </div>
-    <p>More...</p>
-      
-        <nav>
-            <b class="links" ><i><a href="login.html">Login</a></i></b>
-            <b class="links" ><i><a href= "signup.html">SignUp</a></i></b>
-            <b class="links"><i><a href="notes.html">Notes</a></i></b>
-            <b class="links"><i><a href="comments.html">Comments</a></i></b>
-        </nav>
+  <p>Test if main page loaded</p>
     
         <p class = "para">
             Introduction:<br>
