@@ -31,11 +31,16 @@ public class CustomUserDetailService implements UserDetailsService {
 
         User user = new User();
 
-        try (Connection connection = dataSourceAuth.getConnection()) {
-            Statement stmt = connection.createStatement();
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            connection = dataSourceAuth.getConnection();
+            stmt = connection.createStatement();
 
             // Checks if the given email and hashed password combination is in the table
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + username + "'");
+            rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + username + "'");
             if (!rs.next()) {
                 throw new UsernameNotFoundException("Could not find the user");
             }
@@ -50,7 +55,11 @@ public class CustomUserDetailService implements UserDetailsService {
 
         } catch (Exception e) {
             throw new UsernameNotFoundException("Could not find the user");
-        }
+        } finally {
+            try { rs.close(); } catch (Exception e) {}
+            try { stmt.close(); } catch (Exception e) {}
+            try { connection.close(); } catch (Exception e) {}
+      }
 
         return user;
     }
