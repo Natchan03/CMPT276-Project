@@ -59,14 +59,14 @@ public class Main {
       Statement stmt = connection.createStatement();
 
       // Create users table if not exists
-      String sql1 = "CREATE TABLE IF NOT EXISTS users " +
-      "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
+      String sql1 = "CREATE TABLE IF NOT EXISTS users "
+          + "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
       System.out.println(sql1);
       stmt.executeUpdate(sql1);
 
       // Check whether the table has admin
       ResultSet rs = stmt.executeQuery("SELECT * FROM users where email='admin@younote.com'");
-      if (rs.next()){
+      if (rs.next()) {
         // There is already an admin account no need to create new one
         return;
       }
@@ -75,7 +75,8 @@ public class Main {
       String hashed = BCrypt.hashpw("admin", BCrypt.gensalt());
 
       // Insert admin to the table
-      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('admin','admin','admin@younote.com','" + hashed + "', 'admin')" ;
+      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('admin','admin','admin@younote.com','"
+          + hashed + "', 'admin')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
     } catch (Exception e) {
@@ -85,32 +86,27 @@ public class Main {
 
   // Loads each static page corresponding to its page name
   @RequestMapping("{pageName}")
-  public String loadStaticPage(@PathVariable("pageName") String pageName) { 
+  public String loadStaticPage(@PathVariable("pageName") String pageName) {
     System.out.println(pageName);
     return pageName.isEmpty() ? "index" : pageName;
   }
 
-  @GetMapping(
-    path = "/signup"
-  )
-  public String getSignupPage(Map<String, Object> model){
+  @GetMapping(path = "/signup")
+  public String getSignupPage(Map<String, Object> model) {
     User user = new User();
     model.put("user", user);
     return "signup";
   }
 
-  @PostMapping(
-    path = "/user",
-    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
-  )
+  @PostMapping(path = "/user", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleBrowserUserSubmit(Map<String, Object> model, User user) throws Exception {
-    
+
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
       // Check whether the given user already exists. If so, fail the request
       ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
-      if (rs.next()){
+      if (rs.next()) {
         return "error";
       }
 
@@ -118,7 +114,8 @@ public class Main {
       String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 
       // Insert the new user to the table
-      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','" + user.getLname() +"','" + user.getEmail() + "','" + hashed + "', 'regular')" ;
+      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','"
+          + user.getLname() + "','" + user.getEmail() + "','" + hashed + "', 'regular')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
@@ -130,36 +127,9 @@ public class Main {
     }
   }
 
-  @GetMapping(
-          path = "/login"
-  )
-  public String getLoginPage(Map<String, Object> model){
-    User user = new User();
-    model.put("user", user);
+  @GetMapping(path = "/login")
+  public String getLoginPage(Map<String, Object> model) {
     return "login";
-  }
-
-  // Checks if submitted login info is valid
-  @PostMapping(
-    path = "/login",
-    consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}
-  )
-  public String authenicateLogin(Map<String, Object> model, User user) throws Exception {
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
-
-      // Checks if the given email and hashed password combination is in the table
-      ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
-      if (rs.next() && BCrypt.checkpw(user.getPassword(), rs.getString("password"))) {
-          System.out.println("Logging in to " + user.getEmail());
-          return "redirect:/";
-      }
-      System.out.println("Invalid user and password combination");
-      return "redirect:/login";
-    } catch (Exception e) {
-      model.put("message", e.getMessage());
-      return "error";
-    }
   }
 
   @Bean
