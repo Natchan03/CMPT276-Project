@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.*;
+import javax.annotation.PostConstruct;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -48,6 +49,38 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
+  }
+
+  // Method called on application start-up to do some initialization
+  @PostConstruct
+  private void postConstruct() {
+
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+
+      // Create users table if not exists
+      String sql1 = "CREATE TABLE IF NOT EXISTS users " +
+      "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
+      System.out.println(sql1);
+      stmt.executeUpdate(sql1);
+
+      // Check whether the table has admin
+      ResultSet rs = stmt.executeQuery("SELECT * FROM users where email='admin@younote.com'");
+      if (rs.next()){
+        // There is already an admin account no need to create new one
+        return;
+      }
+
+      // Hash the password
+      String hashed = BCrypt.hashpw("admin", BCrypt.gensalt());
+
+      // Insert admin to the table
+      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('admin','admin','admin@younote.com','" + hashed + "', 'admin')" ;
+      System.out.println(sql);
+      stmt.executeUpdate(sql);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   // Loads each static page corresponding to its page name
@@ -75,12 +108,6 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      // Create users table if not exists
-      String sql1 = "CREATE TABLE IF NOT EXISTS users " +
-      "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
-      System.out.println(sql1);
-      stmt.executeUpdate(sql1);
-
       // Check whether the given user already exists. If so, fail the request
       ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
       if (rs.next()){
@@ -91,7 +118,7 @@ public class Main {
       String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 
       // Insert the new user to the table
-      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','" + user.getLname() +"','" + user.getEmail() + "','" + hashed + "', 'regular')" ;// shouldnt 'regular' be user.getType()? - simar
+      String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','" + user.getLname() +"','" + user.getEmail() + "','" + hashed + "', 'regular')" ;
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
