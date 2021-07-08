@@ -13,3 +13,12 @@
 body{background: rgb(34,34,34);}
 .button{color:black;}
 .text{color:white;}
+
+.features{
+    background-color: burlywood;
+    color: black;
+    text-shadow: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    max-width: 520px;
+    margin: auto;
+}
