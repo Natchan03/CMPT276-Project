@@ -26,15 +26,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.*;
-import javax.annotation.PostConstruct;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
@@ -131,6 +135,15 @@ public class Main {
   @GetMapping(path = "/login")
   public String getLoginPage(Map<String, Object> model) {
     return "login";
+  }
+
+  @RequestMapping(value = "/logout", method = RequestMethod.GET)
+  public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth != null) {
+      new SecurityContextLogoutHandler().logout(request, response, auth);
+    }
+    return "redirect:/login?logout";
   }
 
   @Bean

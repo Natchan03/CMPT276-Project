@@ -64,7 +64,9 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li class="dropdown-divider"></li>
-                      <li sec:authorize="isAuthenticated()"><a class="dropdown-item" href="/logout">Logout</a></li>
+                      <li sec:authorize="isAuthenticated()">
+                        <a class="dropdown-item" href="#" th:href="@{/logout}">Logout</a>
+                      </li>
                       <li sec:authorize="!isAuthenticated()"><a class="dropdown-item" href="/login">Login</a></li>
                       <li sec:authorize="!isAuthenticated()"><a class="dropdown-item" href="/signup">Sign Up</a></li>
                       <li><a class="dropdown-item" href="/feedback">Feedback</a></li>
