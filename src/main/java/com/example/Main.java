@@ -58,9 +58,13 @@ public class Main {
   // Method called on application start-up to do some initialization
   @PostConstruct
   private void postConstruct() {
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
 
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
 
       // Create users table if not exists
       String sql1 = "CREATE TABLE IF NOT EXISTS users "
@@ -69,7 +73,7 @@ public class Main {
       stmt.executeUpdate(sql1);
 
       // Check whether the table has admin
-      ResultSet rs = stmt.executeQuery("SELECT * FROM users where email='admin@younote.com'");
+      rs = stmt.executeQuery("SELECT * FROM users where email='admin@younote.com'");
       if (rs.next()) {
         // There is already an admin account no need to create new one
         return;
@@ -85,6 +89,10 @@ public class Main {
       stmt.executeUpdate(sql);
     } catch (Exception e) {
       System.out.println(e.getMessage());
+    } finally {
+      try { rs.close(); } catch (Exception e) {}
+      try { stmt.close(); } catch (Exception e) {}
+      try { connection.close(); } catch (Exception e) {}
     }
   }
 
@@ -106,11 +114,16 @@ public class Main {
   public String handleBrowserUserSubmit(Map<String, Object> model, User user) throws Exception {
     System.out.println("signup request for: " + user.getEmail());
 
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
 
       // Check whether the given user already exists. If so, fail the request
-      ResultSet rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
+      rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
       if (rs.next()) {
         return "error";
       }
@@ -129,6 +142,10 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
+    } finally {
+      try { rs.close(); } catch (Exception e) {}
+      try { stmt.close(); } catch (Exception e) {}
+      try { connection.close(); } catch (Exception e) {}
     }
   }
 
