@@ -100,6 +100,7 @@ public class Main {
 
   @PostMapping(path = "/user", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleBrowserUserSubmit(Map<String, Object> model, User user) throws Exception {
+    System.out.println("signup request for: " + user.getEmail());
 
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();

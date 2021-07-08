@@ -1,4 +1,6 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"  
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <th:block th:fragment="stylesAndScripts">
       <meta charset="UTF-8" />  
@@ -47,16 +49,25 @@
                   <a href="test">Test</a>
               </li>
             </ul>
+            <ul class="nav navbar-nav" sec:authorize="hasRole('ROLE_ADMIN')">
+              <li class="nav-item">
+                  <a href="/admin">Admin Dashboard</a>
+              </li>
+            </ul>
         
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome Guest <span class="caret"></span></a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <span sec:authorize="isAuthenticated()">Welcome <span th:text="${#authentication.getPrincipal().getFname()}"></span></span>
+                      <span sec:authorize="!isAuthenticated()">Welcome Guest</span>
+                      <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
-        
-                        <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login">Login</a></li>
-                        <li><a class="dropdown-item" href="signup">Sign Up</a></li>
-                        <li><a class="dropdown-item" href="feedback">Feedback</a></li>
+                      <li class="dropdown-divider"></li>
+                      <li sec:authorize="isAuthenticated()"><a class="dropdown-item" href="/logout">Logout</a></li>
+                      <li sec:authorize="!isAuthenticated()"><a class="dropdown-item" href="/login">Login</a></li>
+                      <li sec:authorize="!isAuthenticated()"><a class="dropdown-item" href="/signup">Sign Up</a></li>
+                      <li><a class="dropdown-item" href="/feedback">Feedback</a></li>
                     </ul>
                 </li>
             </ul>
@@ -124,3 +135,4 @@
         </div>
       </footer>
 </body>
+</html>
