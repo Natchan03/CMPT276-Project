@@ -9,7 +9,7 @@ function linkRestyle(videourl){
         videourl = "https://" + videourl;
     }
     if(videourl.includes("youtu.be")){
-        videourl = videourl.substring(0, 8) + "youtube.com/embed/" + videourl.substring(16);
+        videourl = videourl.substring(0, 8) + "www.youtube.com/embed" + videourl.substring(16);
     }
     else{
         if(videourl.includes("watch?")){
