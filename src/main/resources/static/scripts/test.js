@@ -23,6 +23,18 @@ function linkRestyle(videourl){
     }
     return videourl;
 };
+//for future improvents of linkRestyle function---
+//instead of using linkRestyle here's a simple solution which,
+// take a url as input,conducts -> boolean search for ((youtu.be or youtube) and watch) in the input link to assess its validity
+// and then converts a valid link to one usable by iFrame api 
+// by extracting video ID from a valid link, which could be appended to https://www.youtube.com/embed/ to get a iFrame compatible url.
+//heres a console example implemented to search only for watch in the link and convert it to iFram compatible form.
+//let str = "https://www.youtube.com/watch?v=cCBSsh3whvU";
+//let strpreced= "https://www.youtube.com/embed/"
+//let processedURL=""
+//str=str.substr(str.search("watch")+8, );
+//var url = processedURL.concat(strpreced,str);
+
 
 $(document).ready(function() {
     $('#summernote').summernote();
