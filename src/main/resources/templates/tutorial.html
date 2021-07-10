@@ -8,21 +8,21 @@
 
 <body class="text">
   <nav th:replace="fragments/common :: navbar"></nav>
-  <h2 class="tutorial"> Tutorial </h2>
-  <h4 class= "info"> * On main page Go to Top right Corner where it says Welcome Guest:</h4>
-  <ul class="list"> You will have three Options:
-  <li> Login : To login into the account </li>
-  <li> SignUp:  To signup if you are first time user </li>
-  <li> Feedback: To provide a feedback</li>
- </ul>
-  <h4 class= "info"> * On the Top Left Corner their is a Navigation Bar with different Link Provided:</h4>
-  <ul class="list"> You have four other Options than tutorial:
-    <li> Home :which shows the searchbox to enter the url of the video and a texbox provide to take the notes </li>
-    <li> ViewNotes: Where you can view your notes</li>
-    <li> Upcoming Features </li>
-    <li> Test: Where you could test the website</li>
-   </ul>
-  <h4 class= "info"> * All Website Links are provided in the bottom left corner for your convenience.</h4>
+  <h2 class="tutorial">Tutorial</h2>
+  <h4 class= "info">Click on the "Welcome Guest" dropdown menu to show 3 options:</h4>
+  <ul class="list">  
+    <li>Login: login into an account.</li>
+    <li>Sign Up: sign up for an account.</li>
+    <li>Feedback: provide feedback on your experience with the app.</li>
+  </ul>
+  <h4 class= "info">The left side of the navigation bar contains 4 links other than the tutorial:</h4>
+  <ul class="list">
+    <li>Home: contains a search bar to find a YouTube video.</li>
+    <li>View Notes: view, edit, and share your saved notes.</li>
+    <li>Upcoming Features: list some features we will implement for iteration 2 and 3.</li>
+    <li>Test: shows a sample page with a search box to embed a YouTube URL and input to write notes.</li>
+  </ul>
+  <h4 class= "info">Most website links are provided at the bottom of the page for convenience.</h4>
   <footer th:replace="fragments/common :: foot"></footer> 
 </body>
 
