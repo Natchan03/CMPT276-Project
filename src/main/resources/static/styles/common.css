@@ -19,6 +19,42 @@ body{background: rgb(34,34,34);}
     color: black;
     text-shadow: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    max-width: 520px;
-    margin: auto;
+    max-width: 600px;
+    margin-left: 20%;
+    font-weight: bold;
+    list-style-type:disc;
+}
+
+.upcomingFeatures{
+    background-color: cornsilk;
+    color: black;
+    max-width: 900px;
+    margin-left: 10%;
+}
+
+.tutorial{
+    background-color: coral;
+    max-width: 300px;
+    padding-left: 80px;
+    margin-left: 35%;
+    text-decoration: lightgray;
+    font-weight: bold;
+    border-width: 20px;
+    border-color: white;
+}
+
+.info{
+    background-color: lightblue;
+    max-width: 680px ;
+    padding-left: 50px;
+    color: black;
+    margin-left: 20%;
+}
+
+.list{
+    background-color: lightsalmon;
+    color: black;
+    max-width: 680px ;
+    padding-left: 60px;
+    margin-left: 20%;
 }
