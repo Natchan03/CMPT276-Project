@@ -14,9 +14,12 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 ### Iteration 1: Signup and login for regular users
 * Alex (User) is a university student who wishes to take notes while watching a YouTube video of his instructor using YouNote. As he is a new user to the application, he will first sign up to make an account in YouNote. By clicking on the “Signup” button, he will see text fields where he registers his first name, last name, and email; and inputs his desired password. After entering this information, he clicks the “Create my account” button to register his account.
   * After creating an account, he can log in to his account by entering his registered email and password in the text fields provided and then click on the “Log In” button. Once logged in, it will show “Welcome Alex” indicating he has logged into his account. There will be a “Logout” button in the top-right dropdown menu which he can click to logout of his account.
+  * For error cases when signing up, not entering input in any of the text fields will display an error page with the first error encountered.
+  * For error cases when logging in, entering the incorrect credentials will redirect the user back to the login page with cleared inputs.
 
 ### Iteration 1: Login for admin user
 * A default admin account will automatically be created when the application starts. If the admin wants to access his account in YouNote, he enters the email and password of the admin account in the login page and clicks the “Log In” button. Once the admin is logged in, the page will show “Welcome admin” to indicate that the admin has logged in. An admin will also see an “Admin Dashboard” button. There is a “Logout” button which the admin can click to log out of his account.
+* The admin account is registered with an email “admin@younote.com” and password “admin”.
 
 ### Iteration 1: Viewing Users database from admin account
 * Once an admin logs into an admin account, he will be able to click on the “Admin Dashboard” to view information in the Users database, including the ID, first name, last name, email, and type of account. The admin will not be able to view the hashed password of accounts on the dashboard page for security purposes.
@@ -28,6 +31,7 @@ He can click on the tutorial button on the homepage which will give him a brief 
   * The test page currently does not have the option to save notes.
   * Clicking on the “Upcoming Features” button on the navigation bar allows Alex to view all upcoming features of the application.
   * Alex can give feedback on the app by clicking the “Feedback” link, found in both the dropdown menu and footer. The feedback page has an option for him to enter his first name, last name, and any suggestions he would like to provide about the app.
+  * If Alex enters an incorrect YouTube URL on the “Test” page, a crash page embedded in the page will be shown where the embedded video is supposed to be.
 
 ## User Stories for Iterations 2 and 3
 
