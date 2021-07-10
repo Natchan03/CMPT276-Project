@@ -39,6 +39,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
@@ -90,9 +91,18 @@ public class Main {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     } finally {
-      try { rs.close(); } catch (Exception e) {}
-      try { stmt.close(); } catch (Exception e) {}
-      try { connection.close(); } catch (Exception e) {}
+      try {
+        rs.close();
+      } catch (Exception e) {
+      }
+      try {
+        stmt.close();
+      } catch (Exception e) {
+      }
+      try {
+        connection.close();
+      } catch (Exception e) {
+      }
     }
   }
 
@@ -108,6 +118,59 @@ public class Main {
     User user = new User();
     model.put("user", user);
     return "signup";
+  }
+
+  @GetMapping(path = "/admin")
+  public String getAdminDashboard(Map<String, Object> model) {
+
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    ArrayList<User> userList = new ArrayList<User>();
+
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      // Gets all users
+      rs = stmt.executeQuery("SELECT * FROM users");
+
+      while (rs.next()) {
+
+        User user = new User();
+
+        // Construct the user object from the database
+
+        user.setId(rs.getInt("id"));
+        user.setFname(rs.getString("fname"));
+        user.setLname(rs.getString("lname"));
+        user.setEmail(rs.getString("email"));
+        user.setPassword(rs.getString("password"));
+        user.setType(rs.getString("type"));
+
+        userList.add(user);
+      }
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    } finally {
+      try {
+        rs.close();
+      } catch (Exception e) {
+      }
+      try {
+        stmt.close();
+      } catch (Exception e) {
+      }
+      try {
+        connection.close();
+      } catch (Exception e) {
+      }
+    }
+
+    model.put("userList", userList);
+    return "admin";
   }
 
   @PostMapping(path = "/user", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
@@ -143,9 +206,18 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     } finally {
-      try { rs.close(); } catch (Exception e) {}
-      try { stmt.close(); } catch (Exception e) {}
-      try { connection.close(); } catch (Exception e) {}
+      try {
+        rs.close();
+      } catch (Exception e) {
+      }
+      try {
+        stmt.close();
+      } catch (Exception e) {
+      }
+      try {
+        connection.close();
+      } catch (Exception e) {
+      }
     }
   }
 
