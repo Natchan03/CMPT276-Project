@@ -185,6 +185,23 @@ public class Main {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
 
+      if (user.getFname() == null || user.getFname().trim().isEmpty()) {
+        model.put("message", "Invalid First Name");
+        return "error";
+      }
+      if (user.getLname() == null || user.getLname().trim().isEmpty()) {
+        model.put("message", "Invalid Last Name");
+        return "error";
+      }
+      if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+        model.put("message", "Invalid Email");
+        return "error";
+      }
+      if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+        model.put("message", "Invalid Password");
+        return "error";
+      }
+
       // Check whether the given user already exists. If so, fail the request
       rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
       if (rs.next()) {
