@@ -91,18 +91,7 @@ public class Main {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     } finally {
-      try {
-        rs.close();
-      } catch (Exception e) {
-      }
-      try {
-        stmt.close();
-      } catch (Exception e) {
-      }
-      try {
-        connection.close();
-      } catch (Exception e) {
-      }
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
   }
 
@@ -155,18 +144,7 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     } finally {
-      try {
-        rs.close();
-      } catch (Exception e) {
-      }
-      try {
-        stmt.close();
-      } catch (Exception e) {
-      }
-      try {
-        connection.close();
-      } catch (Exception e) {
-      }
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
 
     model.put("userList", userList);
@@ -223,18 +201,7 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     } finally {
-      try {
-        rs.close();
-      } catch (Exception e) {
-      }
-      try {
-        stmt.close();
-      } catch (Exception e) {
-      }
-      try {
-        connection.close();
-      } catch (Exception e) {
-      }
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
   }
 

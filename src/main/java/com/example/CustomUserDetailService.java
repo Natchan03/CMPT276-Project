@@ -56,10 +56,8 @@ public class CustomUserDetailService implements UserDetailsService {
         } catch (Exception e) {
             throw new UsernameNotFoundException("Could not find the user");
         } finally {
-            try { rs.close(); } catch (Exception e) {}
-            try { stmt.close(); } catch (Exception e) {}
-            try { connection.close(); } catch (Exception e) {}
-      }
+            Utils.DisposeDBHandles(connection, stmt, rs);
+        }
 
         return user;
     }
