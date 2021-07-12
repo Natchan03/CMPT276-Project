@@ -6,6 +6,8 @@
   </head>
   <body class="text">
     <nav th:replace="fragments/common :: navbar"></nav>
+    <div class="contentstyle">
+
     <div style=" margin: auto; max-width: 750px; text-align: center; height: 500px; color: white">
       <br> <h1 class="comment">User Feedback</h1>
       <form action="/index">
@@ -21,6 +23,7 @@
         <br>
        <form action="/index"><input class="button" type = "submit" value="Submit Feedback & return to Home"></form>
       </form>
+    </div>
     </div>
     <footer th:replace="fragments/common :: foot"></footer> 
   </body>

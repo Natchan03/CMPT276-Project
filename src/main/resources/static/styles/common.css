@@ -24,7 +24,10 @@ body{background: rgb(34,34,34);}
     font-weight: bold;
     list-style-type:disc;
 }
-
+.contentstyle{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
 .upcomingFeatures{
     background-color: cornsilk;
     color: black;

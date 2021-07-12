@@ -54,5 +54,7 @@ var processedURL="";
 
 
 $(document).ready(function() {
-    $('#summernote').summernote();
+    $('#summernote').summernote({width: 550,                
+         height: 580, disableResizeEditor:true});
+    
 });
