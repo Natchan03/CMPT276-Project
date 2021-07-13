@@ -24,6 +24,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -217,6 +218,53 @@ public class Main {
       new SecurityContextLogoutHandler().logout(request, response, auth);
     }
     return "redirect:/login?logout";
+  }
+
+  @GetMapping(path = "/display_user/{id}")
+  public String displayUser(Map<String, Object> model, @PathVariable String id){
+    User user = new User();
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      // Gets all users
+      rs = stmt.executeQuery("SELECT * FROM users WHERE id = " + id);
+
+      while (rs.next()) {
+        user.setId(rs.getInt("id"));
+        user.setFname(rs.getString("fname"));
+        user.setLname(rs.getString("lname"));
+        user.setEmail(rs.getString("email"));
+        user.setPassword(rs.getString("password"));
+        user.setType(rs.getString("type"));
+      }
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+    model.put("user", user);
+    return "display_user";
+  }
+
+  @PostMapping(path = "/delete_account/{id}")
+  public String deleteAccount(Map<String, Object> model, @PathVariable String id){
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      stmt.executeUpdate("DELETE FROM users WHERE id = " + id);
+
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+    return "redirect:/admin";
   }
 
   @Bean

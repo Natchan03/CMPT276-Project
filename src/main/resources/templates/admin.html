@@ -25,7 +25,7 @@
       </thead>
       <tbody>
         <tr th:each="user : ${userList}">
-          <th scope="row" th:text="${user.id}"></th>
+          <td><a th:text="${user.id}" th:href="@{'/display_user/' + ${user.id}}"></a></td>
           <td th:text="${user.fname}"></td>
           <td th:text="${user.lname}"></td>
           <td th:text="${user.email}"></td>
