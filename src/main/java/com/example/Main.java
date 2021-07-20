@@ -74,6 +74,21 @@ public class Main {
       System.out.println(sql1);
       stmt.executeUpdate(sql1);
 
+      // Create notes table if not exists
+      String sql2 = "CREATE TABLE IF NOT EXISTS notes "
+          + "(id serial,videoId varchar(11),title varchar(40),dateCreated date,ownerId bigint,sharedIds bigint[],"
+          + "PRIMARY KEY(id))";
+      System.out.println(sql2);
+      stmt.executeUpdate(sql2);
+
+      // Create timestamps table if not exists.
+      // Note the primary key is a combination of seconds and the foreign key to the id in the notes table
+      String sql3 = "CREATE TABLE IF NOT EXISTS timestamps "
+          + "(noteId bigint,seconds bigint,content varchar(300),"
+          + "PRIMARY KEY(noteId,seconds),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
+      System.out.println(sql3);
+      stmt.executeUpdate(sql3);
+
       // Check whether the table has admin
       rs = stmt.executeQuery("SELECT * FROM users where email='admin@younote.com'");
       if (rs.next()) {
@@ -89,6 +104,7 @@ public class Main {
           + hashed + "', 'admin')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
+
     } catch (Exception e) {
       System.out.println(e.getMessage());
     } finally {
@@ -132,7 +148,7 @@ public class Main {
 
         // Construct the user object from the database
 
-        user.setId(rs.getInt("id"));
+        user.setId(rs.getLong("id"));
         user.setFname(rs.getString("fname"));
         user.setLname(rs.getString("lname"));
         user.setEmail(rs.getString("email"));
@@ -234,7 +250,7 @@ public class Main {
       rs = stmt.executeQuery("SELECT * FROM users WHERE id = " + id);
 
       while (rs.next()) {
-        user.setId(rs.getInt("id"));
+        user.setId(rs.getLong("id"));
         user.setFname(rs.getString("fname"));
         user.setLname(rs.getString("lname"));
         user.setEmail(rs.getString("email"));
