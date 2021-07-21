@@ -55,10 +55,17 @@ var processedURL="";
 
 $(document).ready(function() {
     $('#summernote').summernote({width: window.screen.width/2.25,                
-         height: window.screen.height/2, disableResizeEditor:true});
-    
+         height: window.screen.height/2, disableResizeEditor:true, placeholder:'Enter notes here'});
 });
 
+ /* WORK IN PROGRESS
+ function timeStamp(){
+     ytplayer = document.getElementsByTagName("#getvideo");
+
+     var HTMLString = "<p>"+ ytplayer.getCurrentTime + "</p>";
+     $('#summernote').summernote('pasteHTML', HTMLString);
+ };
+*/
 //console.log(window.screen.width);
 
 
