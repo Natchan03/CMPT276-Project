@@ -3,8 +3,7 @@ function loadVideo() {
     videourl = linkRestyle(videourl);
     document.getElementById("getvideo").src=videourl;
 };
-
- function linkRestyle(videourl){
+function linkRestyle(videourl){
   
 var processedURL="";
   var strpreced="https://www.youtube.com/embed/"
@@ -66,6 +65,26 @@ $(document).ready(function() {
      $('#summernote').summernote('pasteHTML', HTMLString);
  };
 */
-//console.log(window.screen.width);
+
+// function below takes a videourl, and a timestamp T from timestamp function above in format(XmYs where X and y are numbers) to convert it into a timed youtube link 
+function linkToTimedlink(videourl,T){
+  
+    var processedURL="";
+      var strpreced="https://www.youtube.com/watch?v="  // reprocessing of the link 
+      var strsucced="&t="
+        if((videourl.includes("youtube") || videourl.includes("youtu.be")) && videourl.includes("watch"))
+        {
+             videourl=videourl.substr(videourl.search("watch")+8,);
+             videourl=videourl.slice( 0, 11);
+             var url=processedURL.concat(strpreced,videourl);
+             var url = url.concat(t);
+             return url;
+        }  
+     }
+//var links= linkToTimedlink("https://www.youtube.com/watch?v=8EHEvx4eGlQ","2m40s")
+//returns links="https://www.youtube.com/watch?v=8EHEvx4eGlQ&t=50s"
+
+
+
 
 
