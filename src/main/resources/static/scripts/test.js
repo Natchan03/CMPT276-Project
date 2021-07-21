@@ -3,22 +3,23 @@ function loadVideo() {
     videourl = linkRestyle(videourl);
     document.getElementById("getvideo").src=videourl;
 };
-function linkRestyle(videourl){
-  
-var processedURL="";
-  var strpreced="https://www.youtube.com/embed/"
-    if((videourl.includes("youtube") || videourl.includes("youtu.be")) && videourl.includes("watch"))
-    {
-         videourl=videourl.substr(videourl.search("watch")+8,);
-         videourl=videourl.slice( 0, 11);
-         var url=processedURL.concat(strpreced,videourl); 
-         return url;
-    }
-    else{alert("The URL provided is invalid, please try again with a valid Youtube video URL")}
 
-   
-    
- }
+  
+    function linkRestyle(videourl){
+  
+        var processedURL="";
+          var strpreced="https://www.youtube.com/embed/"
+            if((videourl.includes("youtube") || videourl.includes("youtu.be")) && videourl.includes("watch"))
+            {
+                 videourl=videourl.substr(videourl.search("watch")+8,);
+                 videourl=videourl.slice( 0, 11);
+                 var url=processedURL.concat(strpreced,videourl); 
+              
+                 return url;
+            }
+            else{alert("The URL provided is invalid, please try again with a valid Youtube video URL")}
+        
+        }
 //  function linkRestyle(videourl){
  
 //      if(!videourl.includes("https://")){

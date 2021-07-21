@@ -1,0 +1,72 @@
+<html>
+<head>
+    <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+<script th:src="@{/scripts/common.js}" defer></script>
+</head>
+<body>
+    <nav th:replace="fragments/common :: navbar"></nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="text" id="input_field" style="width:460px" placeholder="Enter YouTube video URL" >
+                <button onclick="loadVideo()">Load Video</button>
+                    <iframe id="existing-iframe-example"
+
+                            width="550" height="572"
+                            
+                            frameborder="0"
+                            style="border: solid 4px #37474F"
+                    ></iframe>
+            </div>
+            <div class="col-sm-6">
+              <div id="summernote"></div>
+              
+            </div>
+        </div>
+    </div>
+<footer th:replace="fragments/common :: foot"></footer> 
+
+
+<script type="text/javascript">
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('existing-iframe-example', {
+
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+  function onPlayerReady(event) {
+    document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
+  }
+  function changeBorderColor(playerStatus) {
+    var color;
+    if (playerStatus == -1) {
+      color = "#969695"; // unstarted = gray
+    } else if (playerStatus == 0) {
+      color = "#969695"; // ended = yellow
+    } else if (playerStatus == 1) {
+      color = "#3EF80B"; // playing = green
+    } else if (playerStatus == 2) {
+      color = "F8350B"; // paused = red
+    } else if (playerStatus == 3) {
+      color = "#AA00FF"; // buffering = purple
+    }
+    if (color) {
+      document.getElementById('existing-iframe-example').style.borderColor = color;
+    }
+  }
+  function onPlayerStateChange(event) {
+    changeBorderColor(event.data);
+  }
+</script>
+</body>
+</html>
