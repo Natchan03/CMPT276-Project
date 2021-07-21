@@ -67,22 +67,22 @@ $(document).ready(function() {
 */
 
 // function below takes a videourl, and a timestamp T from timestamp function above in format(XmYs where X and y are numbers) to convert it into a timed youtube link 
-function linkToTimedlink(videourl,T){
+function linkToTimedlink(videourl,t){
   
     var processedURL="";
-      var strpreced="https://www.youtube.com/watch?v="  // reprocessing of the link 
-      var strsucced="&t="
+      var strpreced="https://www.youtube.com/watch?v="  // reprocessing of the link
+      var strsucced="&t=".concat(t)
         if((videourl.includes("youtube") || videourl.includes("youtu.be")) && videourl.includes("watch"))
         {
              videourl=videourl.substr(videourl.search("watch")+8,);
              videourl=videourl.slice( 0, 11);
              var url=processedURL.concat(strpreced,videourl);
-             var url = url.concat(t);
+             var url = url.concat(strsucced);
              return url;
         }  
      }
 //var links= linkToTimedlink("https://www.youtube.com/watch?v=8EHEvx4eGlQ","2m40s")
-//returns links="https://www.youtube.com/watch?v=8EHEvx4eGlQ&t=50s"
+//returns links="https://www.youtube.com/watch?v=8EHEvx4eGlQ&t=2m40s"
 
 
 
