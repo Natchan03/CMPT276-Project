@@ -28,12 +28,6 @@ body{background: rgb(34,34,34);}
     padding-left: 2rem;
     padding-right: 2rem;
 }
-.upcomingFeatures{
-    background-color: cornsilk;
-    color: black;
-    max-width: 900px;
-    margin-left: 10%;
-}
 
 .tutorial{
     background-color: coral;
@@ -46,18 +40,3 @@ body{background: rgb(34,34,34);}
     border-color: white;
 }
 
-.info{
-    background-color: lightblue;
-    max-width: 680px ;
-    padding-left: 50px;
-    color: black;
-    margin-left: 20%;
-}
-
-.list{
-    background-color: lightsalmon;
-    color: black;
-    max-width: 680px ;
-    padding-left: 60px;
-    margin-left: 20%;
-}
