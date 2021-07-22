@@ -18,10 +18,9 @@ function linkRestyle(videourl){
              return url;
         }
         else{alert("The URL provided is invalid, please try again with a valid Youtube video URL")}
-    
-       
-        
      }
+
+
 //  function linkRestyle(videourl){
  
 //      if(!videourl.includes("https://")){
