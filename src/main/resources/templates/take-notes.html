@@ -8,7 +8,7 @@
 <nav th:replace="fragments/common :: navbar"></nav>
 <div class="container">
     <div class="row">
-      <div class="col-sm-6"  >
+      <div class="col-sm-6" style="position:relative; left: 3.5rem" >
         <!-- <iframe id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
         <iframe  width="800" height="595" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           <!--<button onclick="timeStamp()">Manual Time Stamp</button>-->
@@ -19,11 +19,11 @@
     </div>
     </div>
 </div>
-   <div style="width:650px; position:relative; left: 175px;">
-  <input type="text" id="input_field" style="width:500px;" placeholder="Enter YouTube video URL" >
+   <div style="width:650px; position:relative; left: 175px; margin-left: 0;">
+  <input type="text" id="input_field" style="width:500px; margin-left: 0;" placeholder="Enter YouTube video URL" >
   <button onclick="loadVideo()">Load Video</button>
 </div>
-<div style="width:300px; position:relative; left: 1300px; top:-25px;">
+<div style="width:300px; position:relative; left: 1300px; top:-25px; margin-left:0;" >
   <button >Add Timestamp</button>
   <button >Save Notes</button>
   
