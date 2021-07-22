@@ -5,29 +5,28 @@
   <script th:src="@{/scripts/test.js}" defer></script>
   </head>
   <body>
-    <nav th:replace="fragments/common :: navbar"></nav>
-    
-    <main>
+      <nav th:replace="fragments/common :: navbar"></nav>
       <div class="container">
-        <div class="row">
-          <div class="col-sm-6" style="position:relative; left: 10rem" >
-            <iframe  width="800" height="595" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="row" style="max-width: min-content;">
+              <div class="col-sm-6" style="padding-left: 5rem;" >
+                <iframe  width="725" height="585" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              
+                <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
+                  <input type="text" id="input_field" class="form-control" placeholder="Enter a YouTube video URL to load video">
+                  <div class="input-group-append" >
+                    <button onclick="loadVideo()" class="btn btn-light" type="button">Load Video</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="position:relative;  left:450px;">
+                <div id="summernote"></div>
+                <br>
+                <button class="btn btn-light" type="button">Add Timestamp</button>
+                <button class="btn btn-light" type="button">Save Notes</button>
+              </div>
           </div>
-          <div class="col-sm-6">
-            <div id="summernote"></div>
-          </div>
-        </div>
       </div>
-        <div style="width:650px; position:relative; left: 175px;">
-          <input type="text" id="input_field" style="width:500px;" placeholder="Enter YouTube video URL" >
-          <button onclick="loadVideo()">Load Video</button>
-        </div>
-        <div style="width:300px; position:relative; left: 1300px; top:-25px;">
-          <button >Add Timestamp</button>
-          <button >Save Notes</button>
-        </div>
-    </main>
-
-    <footer th:replace="fragments/common :: foot"></footer> 
+  
+  <footer th:replace="fragments/common :: foot"></footer> 
   </body>
   </html>

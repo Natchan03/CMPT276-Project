@@ -288,6 +288,22 @@ public class Main {
     return "redirect:/admin";
   }
 
+  @GetMapping(path = "/userPage")
+  public String UserDashboard(Map<String, Object> model){
+    User user = new User();
+    model.put("user", user);
+    return "userPage";
+  }
+
+  @PostMapping(path = "/delete_user_account")
+  public String deleteUserAccount(Map<String, Object> model){
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    //working on it
+    return "redirect:/signup";
+  }
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
