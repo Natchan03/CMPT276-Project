@@ -16,12 +16,12 @@
         <form method="post" th:action="@{/login}">
           <div class="form-group form-floating">
             <label class="text-white" for="newemail">Email address</label>
-            <input type="email" class="form-control" id="email" name="username" placeholder="name@example.com">
+            <input type="email" class="form-control" id="email" name="username"  required placeholder="name@example.com">
           </div>
 
           <div class="form-group form-floating">
             <label class="text-white" for="newpassword">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <input type="password" class="form-control" id="password" name="password"  required placeholder="Password">
           </div>
 
           <button class="w-100 btn btn-primary" id="button" value="Create my account" type="submit">Login</button>

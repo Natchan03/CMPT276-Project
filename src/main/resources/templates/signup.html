@@ -16,22 +16,22 @@
         <form action="#" method="post" th:action="@{/user}" th:object="${user}">
           <div class="form-group form-floating">
             <label class="text-white" for="fname">First name</label>
-            <input type="text" class="form-control" id="newfname" th:field=*{fname} placeholder="Enter your first name">
+            <input type="text" class="form-control" id="newfname" th:field=*{fname} required placeholder="Enter your first name">
           </div>
 
           <div class="form-group form-floating">
             <label class="text-white" for="lname">Last name</label>
-            <input type="text" class="form-control" id="newlname" th:field=*{lname} placeholder="Enter your last name">
+            <input type="text" class="form-control" id="newlname" th:field=*{lname} required placeholder="Enter your last name">
           </div>
 
           <div class="form-group form-floating">
             <label class="text-white" for="newemail">Email address</label>
-            <input type="email" class="form-control" id="newemail" th:field=*{email} placeholder="name@example.com">
+            <input type="email" class="form-control" id="newemail" th:field=*{email} required placeholder="name@example.com">
           </div>
 
           <div class="form-group form-floating">
             <label class="text-white" for="newpassword">Password</label>
-            <input type="password" class="form-control" id="newpassword" th:field=*{password} placeholder="Password">
+            <input type="password" class="form-control" id="newpassword" th:field=*{password} required placeholder="Password">
           </div>
 
           <button class="w-100 btn btn-lg btn-primary " id="newbutton" value="Create my account" type="submit">Sign up</button>

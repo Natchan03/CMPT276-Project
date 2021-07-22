@@ -197,6 +197,11 @@ public class Main {
         return "error";
       }
 
+      if (!Utils.isValidEmailAddress(user.getEmail())){
+        model.put("message", "Invalid Email Format (ex:name@example.com)");
+        return "error";
+      }
+
       // Check whether the given user already exists. If so, fail the request
       rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
       if (rs.next()) {
