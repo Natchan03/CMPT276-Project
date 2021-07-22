@@ -10,3 +10,12 @@ function check(type){
     }
     return true;
 }
+
+function deleteUserAccount(){
+    var text = document.getElementById("deleteBox").value;
+    if(text !== "DELETE"){
+        alert("DELETE is not typed properly");
+        return false;
+    } 
+    return true
+}

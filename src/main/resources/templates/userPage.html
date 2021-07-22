@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title>User Dashboard</title>
+  <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+</head>
+
+<body class = "text" th:object="${user}">
+  <nav th:replace="fragments/common :: navbar"></nav>
+  <div class="contentstyle">
+  <div class="container">
+    <div class="alert alert-warning" role="alert">
+      This page is for an Delete Your Account
+    </div>
+   <h2>Delete an account</h2>
+                <form action = "#" method="post" th:action="@{'/delete_user_account}">
+                    <p>Type DELETE here if you are you sure that you want to delete this account</p>
+                    <input type="text" id="deleteBox" style="color: black; "><br>
+                    <p></p>
+                    <input type="submit" value="Delete" onclick="return deleteUserAccount()" style="color: black"/><br>
+                </form>
+      </div>
+      
+  </div>
+  </div>
+<footer th:replace="fragments/common :: foot"></footer> 
+</body>
+
+</html>
