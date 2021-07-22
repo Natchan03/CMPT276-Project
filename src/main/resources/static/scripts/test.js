@@ -54,7 +54,7 @@ function loadVideo() {
 
 
 $(document).ready(function() {
-    $('#summernote').summernote({width: window.screen.width/2.25,                
+    $('#summernote').summernote({width: window.screen.width/2.5,                
          height: window.screen.height/2, disableResizeEditor:true, placeholder:'Enter notes here'});
 });
 

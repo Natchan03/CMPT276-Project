@@ -17,6 +17,9 @@ body{background: rgb(34,34,34);}
     padding-left: 2rem;
     padding-right: 2rem;
 }
+.container {width:100%;max-width:none;position:relative; padding-left: 2rem; padding-right: 2rem;}
+
+
 
 .tutorial{
     background-color: coral;
