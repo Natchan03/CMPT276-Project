@@ -2,23 +2,24 @@
 
 /* Test to see CSS is working properly */
 
-#footerid{
-    background: rgb(34,34,34);
+footer{
+    background: rgb(33, 37, 41);
     color:rgb(221, 218, 218); 
-    position:fixed; 
-    left:0; 
-    bottom:0; 
     width:100%;
 }
-body{background: rgb(34,34,34);}
-.button{color:black;}
-.text{color:white;}
-.contentstyle{
+body{
+    background: rgb(33, 37, 41);
+}
+main {
+    min-height: calc(100vh - 334px);
     padding-left: 2rem;
     padding-right: 2rem;
 }
-.container {width:100%;max-width:none;position:relative; padding-left: 0; padding-right: 0;}
 
+.button{color:black;}
+.text{color:white;}
+
+.container {width:100%;max-width:none;position:relative; padding-left: 0; padding-right: 0;}
 
 .tutorial{
     background-color: coral;
@@ -31,3 +32,54 @@ body{background: rgb(34,34,34);}
     border-color: white;
 }
 
+.info{
+    background-color: lightblue;
+    max-width: 680px ;
+    padding-left: 50px;
+    color: black;
+    margin-left: 20%;
+}
+
+.list{
+    background-color: lightsalmon;
+    color: black;
+    max-width: 680px ;
+    padding-left: 60px;
+    margin-left: 20%;
+}
+
+div.signup {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    /* background-color: #f5f5f5; */
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+  

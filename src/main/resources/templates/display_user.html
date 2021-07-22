@@ -8,7 +8,8 @@
 </head>
 <body class = "text" th:object="${user}">
     <nav th:replace="fragments/common :: navbar"></nav>
-    <div class="contentstyle">
+
+    <main>
         <div class="container">
             <h1>User info</h1>
             <table class="table table-dark">
@@ -39,7 +40,7 @@
                 <input th:access_type="${user.type}" type="submit" value="Delete" onclick="return check(this.getAttribute('access_type'))" style="color: black"/><br>
             </form>
         </div>
-    </div>
+    </main>
     <footer th:replace="fragments/common :: foot"></footer>
 </body>
 </html>

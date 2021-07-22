@@ -8,23 +8,38 @@
 
 <body>
   <nav th:replace="fragments/common :: navbar"></nav>
-  <div class="contentstyle">
 
-  <!-- <img src="../img/logo.png" alt="logo" class="logo" height="80px" width="300px"> -->
-  <div style="background-color: #FF8B80; margin: auto; max-width: 500px; text-align: center; background-clip: content-box; border-radius: 150px / 55px; height: 290px;">
-    <h1 style="padding-top: 30px;">Create a YouNote account</h1>
-    <form action="#" method="post" th:action="@{/user}" th:object="${user}">
-      <input class = "inputtype" type="text" id="newfname" th:field=*{fname} placeholder="enter your first name"> 
-      <input class = "inputtype" type="text" id="newlname" th:field=*{lname} placeholder="enter your last name"> <br> 
-      <br>
-      <input class = "inputtype" type="text" id="newemail" th:field=*{email} placeholder="enter email"> <br> 
-      <input class = "inputtype" type="password" id="newpassword" th:field=*{password} placeholder="enter password"> <br>
-      <input class = "inputtype" type="submit" id="newbutton" value="Create my account" style="margin-top: 10px"> <br>
-    </form>
-    <br>
-    <form action="/login">Already have an account? <input type = "submit" value="Login"><br></form>
-  </div>
-  </div>
+  <main>
+    <div class= "signup">
+      <div class="form-signin">
+        <h1 class="h3 mb-3 fw-normal text-white text-center">Create your account</h1>
+        <form action="#" method="post" th:action="@{/user}" th:object="${user}">
+          <div class="form-group form-floating">
+            <label class="text-white" for="fname">First name</label>
+            <input type="text" class="form-control" id="newfname" th:field=*{fname} placeholder="Enter your first name">
+          </div>
+
+          <div class="form-group form-floating">
+            <label class="text-white" for="lname">Last name</label>
+            <input type="text" class="form-control" id="newlname" th:field=*{lname} placeholder="Enter your last name">
+          </div>
+
+          <div class="form-group form-floating">
+            <label class="text-white" for="newemail">Email address</label>
+            <input type="email" class="form-control" id="newemail" th:field=*{email} placeholder="name@example.com">
+          </div>
+
+          <div class="form-group form-floating">
+            <label class="text-white" for="newpassword">Password</label>
+            <input type="password" class="form-control" id="newpassword" th:field=*{password} placeholder="Password">
+          </div>
+
+          <button class="w-100 btn btn-lg btn-primary " id="newbutton" value="Create my account" type="submit">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
   <footer th:replace="fragments/common :: foot"></footer> 
 </body>
 </html>
