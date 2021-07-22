@@ -1,6 +1,6 @@
 <html>
 <head>
-      <title>test page</title>
+      <title>test</title>
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
 <script th:src="@{/scripts/test.js}" defer></script>
 </head>
@@ -8,7 +8,7 @@
     <nav th:replace="fragments/common :: navbar"></nav>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6" style="position:relative; left: 10rem" >
+            <div class="col-sm-6" style="position:relative; right: 9rem" >
               <iframe  width="800" height="595" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div class="col-sm-6">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div style="width:650px; position:relative; left: 175px;">
+    <div style="width:650px; position:relative; left: 190px;">
         <input type="text" id="input_field" style="width:500px;" placeholder="Enter YouTube video URL" >
         <button onclick="loadVideo()">Load Video</button>
       </div>

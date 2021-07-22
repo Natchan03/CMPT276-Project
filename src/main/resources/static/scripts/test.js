@@ -55,7 +55,7 @@ function loadVideo() {
 
 $(document).ready(function() {
     $('#summernote').summernote({width: window.screen.width/2.5,                
-         height: window.screen.height/2, disableResizeEditor:true, placeholder:'Enter notes here'});
+         height: 595, disableResizeEditor:true, placeholder:'Enter notes here'});
 });
 
  /* WORK IN PROGRESS
