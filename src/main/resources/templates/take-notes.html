@@ -20,9 +20,9 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-6" style="position:relative;  left:450px;">
-                <div id="summernote" th:text="${rawContent}"></div>
+                <div id="summernote" th:text="${rawContent}" ></div>
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title to your Notes before saving"></input>
+                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving"></input>
                   <div class="input-group-append" >
                     <button  class="btn btn-light" type="submit">Save Notes</button>
                   </div>
@@ -34,7 +34,14 @@
           </div>
         </form>
       </div>
-  
+      <footer class="footer bg-dark text-center text-white fixed-bottom" style="background-color: rgb(33, 37, 41)">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2021 Copyright:
+          <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
+          - All Rights Reserved
+        </div>
+      </footer>
+      
 
   </body>
   </html>

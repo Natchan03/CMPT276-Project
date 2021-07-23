@@ -22,10 +22,10 @@
   <header class="p-3 bg-dark text-white" style="background-color: rgb(33, 37, 41) !important" th:fragment="navbar">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a class="navbar-brand" href="index">
-            <img src="../img/FLRB.png" alt="" height="40">
+       
+        <a class="navbar-brand" href="/" style="color:#23a3ff;">
+          <img src="../img/Icon.png" width="35" height="30"  class="d-inline-block align-top" alt="">YouNote
         </a>
-
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li class="nav-item">
             <a class="nav-link px-2 text-secondary" href="/">Home</a>
@@ -63,7 +63,7 @@
     </div>
   </header>
 
-  <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41) !important" th:fragment="foot" >
+  <footer class="footer bg-dark text-center text-white fixed-bottom" style="background-color: rgb(33, 37, 41) !important" th:fragment="foot" >
     <div class="container p-4">
       <section class="">
         <div class="row">
@@ -86,7 +86,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <div sec:authorize="!isAuthenticated()">
+            <!-- <div sec:authorize="!isAuthenticated()">
               <h5 class="text">Start using YouNote</h5>
               <ul class="list-unstyled mb-0">
                 <li>
@@ -96,11 +96,13 @@
                   <a href="signup" class="text-white">Sign Up</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
       
           <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <img src="../img/FLRB.png" height="60" alt="">
+            <a class="navbar-brand" href="/" style="color:#23a3ff;">
+              <img src="../img/Icon.png" width="35" height="30"  class="d-inline-block align-top" alt="">YouNote
+            </a>
             <br> <p>YouNote is a web application that enables its users to take and save notes on YouTube videos, where each note is associated with a timestamp in the video.</p>
           </div>
         </div>
