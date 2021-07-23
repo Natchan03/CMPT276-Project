@@ -20,6 +20,28 @@ function loadVideo() {
             else{alert("The URL provided is invalid, please try again with a valid Youtube video URL")}
         
         }
+    function loadVideo() {
+            var videourl = document.getElementById("input_field").value;
+            videourl=videourl.substr(videourl.search("watch")+8,);
+            return videourl;
+    }
+
+    // returns data in summernotes text editor as html in as a string
+    // tested for links formatted with a sperate show as for eg https://www.youtube.com/watch?v=ARbZKCI6EFY&t=90s link, appears in summernotes as 1m:30s 
+    //get notes will return below, 
+    //"<p><a href=\"https://www.youtube.com/watch?v=ARbZKCI6EFY&amp;t=90s\" target=\"_blank\" style=\"background-color: rgb(255, 255, 255); font-size: 1rem;\">1m:30s</a></p><p><br></p><p><br></p>"
+    function getNotes() {         
+        var txt= $("#summernote").summernote("code"); 
+        return txt}
+    
+    // load notes will take output saved by getNotes into the data base
+    // inject the data back into summernotes as formatted by user before executing getNotes()
+    function loadNotes(txt) {
+
+        $('#summernote').summernote('editor.pasteHTML',txt);
+        
+    }    
+    
 //  function linkRestyle(videourl){
  
 //      if(!videourl.includes("https://")){
@@ -54,7 +76,7 @@ function loadVideo() {
 
 
 $(document).ready(function() {
-    $('#summernote').summernote({width: window.screen.width/2.5,                
+    $('#summernote').summernote({width: window.screen.width/3,                
          height: 595, disableResizeEditor:true, placeholder:'Enter notes here'});
 });
 
