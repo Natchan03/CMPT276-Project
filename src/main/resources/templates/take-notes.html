@@ -13,18 +13,19 @@
                 <iframe  width="725" height="595" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" ></input>
+                  <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                   <div class="input-group-append" >
                     <button onclick="loadVideo()" class="btn btn-light" type="button">Load Video</button>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-6" style="position:relative;  left:450px;">
+              <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
                 <div id="summernote" th:text="${rawContent}" ></div>
-                <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving"></input>
-                  <div class="input-group-append" >
-                    <button  class="btn btn-light" type="submit">Save Notes</button>
+                <div class="input-group sm-3" style="width:725; position:relative; top:25px;">
+                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
+                  <div class="input-group-append">
+                    <button class="btn btn-light" type="submit" sec:authorize="isAuthenticated()">Save Notes</button>
+                    <div class="btn btn-light" sec:authorize="!isAuthenticated()">Login to Save Notes</div>
                   </div>
                 </div>
                

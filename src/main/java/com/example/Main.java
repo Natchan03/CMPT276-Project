@@ -44,6 +44,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @SpringBootApplication
@@ -349,6 +351,7 @@ public class Main {
     return ("redirect:/display_user/" + pid);
   }
 
+
   @GetMapping(path = "/take-notes")
   public String getTakeNotes(Map<String, Object> model) {
     Note note = new Note();
@@ -358,6 +361,7 @@ public class Main {
 
   @PostMapping(path = "/take-notes", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleTakeNotesSubmit(Map<String, Object> model, Note note) throws Exception {
+
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -366,16 +370,19 @@ public class Main {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
       
-      // Clean and get other note parameters
+      // Set youtube ID from youtube URL
       String videoUrl = note.getVideoId();
-      String actualVideoId = videoUrl.substring(videoUrl.lastIndexOf("v=") + 2);
+      String actualVideoId = videoUrl.substring(videoUrl.indexOf("watch") + 8);
+      actualVideoId = actualVideoId.substring(0,11);
       note.setVideoId(actualVideoId);
+      
+      // Set other parameters
       Date newDate = new Date();
       note.setDate(newDate);
       Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       User curUser = (User)principal;
       note.setOwnerId(curUser.getId());
-
+      
       String sql = "INSERT INTO notes(videoId, title, dateCreated, ownerId) VALUES ('" + note.getVideoId() + "','" 
           + note.getTitle() + "','" + note.getDate() + "','" + note.getOwnerId() + "') ";
       System.out.println("Inserting in notes table: " + sql);
