@@ -294,7 +294,7 @@ public class Main {
   }
 
   @GetMapping(path = "/userPage")
-  public String UserDashboard(Map<String, Object> model){
+  public String UserDashboard(Map<String, Object> model,  User user) throws Exception ){
     User user = new User();
     model.put("user", user);
     return "userPage";
