@@ -249,6 +249,7 @@ public class Main {
   @GetMapping(path = "/display_user/{id}")
   public String displayUser(Map<String, Object> model, @PathVariable String id){
     User user = new User();
+    ArrayList<Note> noteList = new ArrayList<Note>();
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -267,11 +268,23 @@ public class Main {
         user.setPassword(rs.getString("password"));
         user.setType(rs.getString("type"));
       }
+
+      rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + id);
+      while(rs.next()){
+        Note note = new Note();
+        note.setId(rs.getLong("id"));
+        note.setDate(rs.getDate("dateCreated"));
+        //Shared ids tbd
+        note.setTitle(rs.getString("title"));
+        note.setVideoId(rs.getString("videoId"));
+        noteList.add(note);
+      }
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
     model.put("user", user);
+    model.put("noteList", noteList);
     return "display_user";
   }
 
@@ -307,6 +320,24 @@ public class Main {
     ResultSet rs = null;
     //working on it
     return "redirect:/signup";
+  }
+
+  @PostMapping(path = "/delete_note/{pid}/{id}")
+  public String deleteNote(Map<String, Object> model, @PathVariable String pid, @PathVariable String id){
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      stmt.executeUpdate("DELETE FROM notes WHERE id = " + id);
+
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+    return ("redirect:/display_user/" + pid);
   }
 
   @Bean
