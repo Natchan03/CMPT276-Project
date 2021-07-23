@@ -205,7 +205,12 @@ public class Main {
       // Check whether the given user already exists. If so, fail the request
       rs = stmt.executeQuery("SELECT * FROM users where email=" + "'" + user.getEmail() + "'");
       if (rs.next()) {
+        model.put("message", "User Already Exists, Please Login");
         return "error";
+      }
+      if (!rs.next()){
+        model.put("message", "You have Succesfully Signed Up" );
+        return "success";
       }
 
       // Hash the password
