@@ -7,24 +7,28 @@
   <body>
       <nav th:replace="fragments/common :: navbar"></nav>
       <div class="container">
+        <form action="#" method="post" th:action="@{/take-notes}" th:object="${note}">  
           <div class="row" style="max-width: min-content;">
               <div class="col-sm-6" style="padding-left: 5rem;" >
                 <iframe  width="725" height="585" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" id="input_field" class="form-control" placeholder="Enter a YouTube video URL to load video">
+                  <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" ></input>
                   <div class="input-group-append" >
                     <button onclick="loadVideo()" class="btn btn-light" type="button">Load Video</button>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6" style="position:relative;  left:450px;">
-                <div id="summernote"></div>
+                <input th:field=${note.title} placeholder="Enter note title here"></input>
+                <br>
+                <div id="summernote" th:text="${rawContent}"></div>
                 <br>
                 <button class="btn btn-light" type="button">Add Timestamp</button>
-                <button class="btn btn-light" type="button">Save Notes</button>
+                <button class="btn btn-light" type="submit">Save Notes</button>
               </div>
           </div>
+        </form>
       </div>
   
   <footer th:replace="fragments/common :: foot"></footer> 

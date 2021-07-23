@@ -26,7 +26,7 @@ public class Note {
         return this.title;
     }
 
-    public Date getDateCreated() {
+    public Date getDate() {
         return this.dateCreated;
     }
 

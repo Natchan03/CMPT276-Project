@@ -40,7 +40,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -319,6 +321,9 @@ public class Main {
     Statement stmt = null;
     ResultSet rs = null;
     //working on it
+    
+    // Optional Suggestion: if admin account or last admin account, prevent delete user account
+    
     return "redirect:/signup";
   }
 
@@ -331,13 +336,58 @@ public class Main {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
 
-      stmt.executeUpdate("DELETE FROM notes WHERE id = " + id);
+      // Gets user currently logged in
+      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User curUser = (User)principal;
+
+      stmt.executeUpdate("DELETE FROM notes WHERE ownerId = " + curUser.getId() + " AND id = " + id);
 
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
     return ("redirect:/display_user/" + pid);
+  }
+
+  @GetMapping(path = "/take-notes")
+  public String getTakeNotes(Map<String, Object> model) {
+    Note note = new Note();
+    model.put("note", note);
+    return "take-notes";
+  }
+
+  @PostMapping(path = "/take-notes", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handleTakeNotesSubmit(Map<String, Object> model, Note note) throws Exception {
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+      
+      // Clean and get other note parameters
+      String videoUrl = note.getVideoId();
+      String actualVideoId = videoUrl.substring(videoUrl.lastIndexOf("v=") + 2);
+      note.setVideoId(actualVideoId);
+      Date newDate = new Date();
+      note.setDate(newDate);
+      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User curUser = (User)principal;
+      note.setOwnerId(curUser.getId());
+
+      String sql = "INSERT INTO notes(videoId, title, dateCreated, ownerId) VALUES ('" + note.getVideoId() + "','" 
+          + note.getTitle() + "','" + note.getDate() + "','" + note.getOwnerId() + "') ";
+      System.out.println("Inserting in notes table: " + sql);
+      // System.out.println(rawContent);
+      stmt.executeUpdate(sql);
+      Utils.DisposeDBHandles(connection, stmt, rs);
+      return "redirect:/take-notes";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      Utils.DisposeDBHandles(connection, stmt, rs);
+      return "error";
+    }
   }
 
   @Bean
