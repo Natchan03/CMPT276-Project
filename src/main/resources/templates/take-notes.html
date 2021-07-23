@@ -2,15 +2,15 @@
   <head>
       <title>Take Notes</title>
       <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
-  <script th:src="@{/scripts/test.js}" defer></script>
+      <script th:src="@{/scripts/test.js}" defer></script>
   </head>
   <body>
       <nav th:replace="fragments/common :: navbar"></nav>
       <div class="container">
         <form action="#" method="post" th:action="@{/take-notes}" th:object="${note}">  
           <div class="row" style="max-width: min-content;">
-              <div class="col-sm-6" style="padding-left: 5rem;" >
-                <iframe  width="725" height="585" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
+                <iframe  width="725" height="595" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
                   <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" ></input>
@@ -19,18 +19,22 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6" style="position:relative;  left:450px;">
-                <input th:field=${note.title} placeholder="Enter note title here"></input>
-                <br>
+              <div class="col-md-6 col-sm-6" style="position:relative;  left:450px;">
                 <div id="summernote" th:text="${rawContent}"></div>
-                <br>
-                <button class="btn btn-light" type="button">Add Timestamp</button>
-                <button class="btn btn-light" type="submit">Save Notes</button>
+                <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
+                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title to your Notes before saving"></input>
+                  <div class="input-group-append" >
+                    <button  class="btn btn-light" type="submit">Save Notes</button>
+                  </div>
+                </div>
+               
+                </div>
+                
               </div>
           </div>
         </form>
       </div>
   
-  <footer th:replace="fragments/common :: foot"></footer> 
+
   </body>
   </html>
