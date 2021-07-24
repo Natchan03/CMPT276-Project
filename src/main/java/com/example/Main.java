@@ -41,6 +41,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -81,7 +82,7 @@ public class Main {
 
       // Create notes table if not exists
       String sql2 = "CREATE TABLE IF NOT EXISTS notes "
-          + "(id serial,videoId varchar(11),title varchar(40),dateCreated date,ownerId bigint,sharedIds bigint[],"
+          + "(id serial,videoId varchar(11),title varchar(40),content varchar(2000),dateCreated date,ownerId bigint,sharedIds bigint[],"
           + "PRIMARY KEY(id))";
       System.out.println(sql2);
       stmt.executeUpdate(sql2);
@@ -283,8 +284,8 @@ public class Main {
       while (rs.next()) {
         Note note = new Note();
         note.setId(rs.getLong("id"));
-        note.setDate(rs.getDate("dateCreated"));
-        // Shared ids tbd
+        note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
+        //Shared ids tbd
         note.setTitle(rs.getString("title"));
         note.setVideoId(rs.getString("videoId"));
         noteList.add(note);
@@ -336,36 +337,37 @@ public class Main {
     return "redirect:/signup";
   }
 
-  @PostMapping(path = "/delete_note/{pid}/{id}")
-  public String deleteNote(Map<String, Object> model, @PathVariable String pid, @PathVariable String id) {
+  @PostMapping(path = "/delete_note/{id}")
+  public String deleteNote(Map<String, Object> model, @PathVariable String id) {
+    
+    // Gets user currently logged in
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User curUser = (User) principal;
+    
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
+    
     try {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
-
-      // Gets user currently logged in
-      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      User curUser = (User) principal;
-
       stmt.executeUpdate("DELETE FROM notes WHERE ownerId = " + curUser.getId() + " AND id = " + id);
-
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
-    return ("redirect:/display_user/" + pid);
+    return ("redirect:/display_user/" + curUser.getId());
   }
 
-  @GetMapping(path = "/take-notes")
+
+  @GetMapping(path = "/take_notes")
   public String getTakeNotes(Map<String, Object> model) {
     Note note = new Note();
     model.put("note", note);
-    return "take-notes";
+    return "take_notes";
   }
 
-  @PostMapping(path = "/take-notes", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  @PostMapping(path = "/take_notes", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleTakeNotesSubmit(Map<String, Object> model, Note note) throws Exception {
 
     Connection connection = null;
@@ -383,24 +385,54 @@ public class Main {
       note.setVideoId(actualVideoId);
 
       // Set other parameters
-      Date newDate = new Date();
-      note.setDate(newDate);
+      note.setDateCreated(LocalDate.now());
       Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       User curUser = (User) principal;
       note.setOwnerId(curUser.getId());
-
-      String sql = "INSERT INTO notes(videoId, title, dateCreated, ownerId) VALUES ('" + note.getVideoId() + "','"
-          + note.getTitle() + "','" + note.getDate() + "','" + note.getOwnerId() + "') ";
+      
+      String sql = "INSERT INTO notes(videoId, title, content, dateCreated, ownerId) VALUES ('" + note.getVideoId() + "','" 
+          + note.getTitle() + "','" + note.getContent() + "','" + note.getDateCreated() + "','" + note.getOwnerId() + "') ";
       System.out.println("Inserting in notes table: " + sql);
       // System.out.println(rawContent);
       stmt.executeUpdate(sql);
-      Utils.DisposeDBHandles(connection, stmt, rs);
-      return "redirect:/take-notes";
+      return "redirect:/take_notes";
     } catch (Exception e) {
       model.put("message", e.getMessage());
+      return "error";
+    } finally {
       Utils.DisposeDBHandles(connection, stmt, rs);
+    }
+  }
+
+  @GetMapping(path = "/view_notes")
+  public String viewNotes(Map<String, Object> model){
+    ArrayList<Note> noteList = new ArrayList<Note>();
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User curUser = (User)principal;
+
+      rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + curUser.getId());
+      while(rs.next()){
+        Note note = new Note();
+        note.setId(rs.getLong("id"));
+        note.setTitle(rs.getString("title"));
+        note.setVideoId(rs.getString("videoId"));
+        note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
+        //Shared ids tbd
+        noteList.add(note);
+      }
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
       return "error";
     }
+    model.put("noteList", noteList);
+    return "view_notes";
   }
 
   @Bean

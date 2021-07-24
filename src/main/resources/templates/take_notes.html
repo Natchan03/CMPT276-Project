@@ -7,7 +7,7 @@
   <body>
       <nav th:replace="fragments/common :: navbar"></nav>
       <div class="container">
-        <form action="#" method="post" th:action="@{/take-notes}" th:object="${note}">  
+        <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">  
           <div class="row" style="max-width: min-content;">
               <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
                 <iframe  
@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
-                <div id="summernote" th:text="${rawContent}" ></div>
+                <div id="summernote" th:text="${note.content}" ></div>
                 <div class="input-group sm-3" style="width:725; position:relative; top:25px;">
                   <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
                   <div class="input-group-append">
@@ -52,7 +52,5 @@
           - All Rights Reserved
         </div>
       </footer>
-      
-
   </body>
-  </html>
+</html>

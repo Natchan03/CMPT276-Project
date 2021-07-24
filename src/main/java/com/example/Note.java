@@ -1,5 +1,6 @@
 package com.example;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.time.Duration;
@@ -9,7 +10,8 @@ public class Note {
     private long id;
     private String videoId;
     private String title;
-    private Date dateCreated;
+    private String content;
+    private LocalDate dateCreated;
     private long ownerId;
     private long[] sharedIds;
 
@@ -26,7 +28,11 @@ public class Note {
         return this.title;
     }
 
-    public Date getDate() {
+    public String getContent() {
+        return this.content;
+    }
+
+    public LocalDate getDateCreated() {
         return this.dateCreated;
     }
 
@@ -51,7 +57,11 @@ public class Note {
         this.title = newTitle;
     }
 
-    public void setDate(Date newDateCreated) {
+    public void setContent(String newContent) {
+        this.content = newContent;
+    }
+
+    public void setDateCreated(LocalDate newDateCreated) {
         this.dateCreated = newDateCreated;
     }
     
