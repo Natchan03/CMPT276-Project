@@ -214,10 +214,10 @@ public class Main {
         model.put("message", "User Already Exists, Please Login");
         return "error";
       }
-      if (!rs.next()) {
+     /* if (!rs.next()) {
         model.put("message", "You have Succesfully Signed Up");
         return "success";
-      }
+      }*/
 
       // Hash the password
       String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
