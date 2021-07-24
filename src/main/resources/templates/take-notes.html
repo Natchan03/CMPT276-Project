@@ -14,7 +14,7 @@
                 width="725" 
                 height="595" 
                 id="getvideo" 
-                title="YouTube video player" 
+                
                 
                 frameborder="0" 
                 style="border: solid 4px #23a3ff"
@@ -25,7 +25,7 @@
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
                   <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                   <div class="input-group-append" >
-                    <button onclick="loadVideo()" class="btn btn-secondary" type="button">Load Video</button>
+                    <button onclick="loadVideo()" class="btn btn-primary" type="button">Load Video</button>
                   </div>
                 </div>
               </div>
@@ -34,8 +34,8 @@
                 <div class="input-group sm-3" style="width:725; position:relative; top:25px;">
                   <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
                   <div class="input-group-append">
-                    <button class="btn btn-light" type="submit" sec:authorize="isAuthenticated()">Save Notes</button>
-                    <div class="btn btn-secondary" sec:authorize="!isAuthenticated()">Login to Save Notes</div>
+                    <button class="btn btn-primary" type="submit" sec:authorize="isAuthenticated()">Save Notes</button>
+                    <div class="btn btn-primary" sec:authorize="!isAuthenticated()">Login to Save Notes</div>
                   </div>
                 </div>
                
