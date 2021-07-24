@@ -293,6 +293,8 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
     model.put("user", user);
     model.put("noteList", noteList);
@@ -313,6 +315,8 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
     return "redirect:/admin";
   }
@@ -324,17 +328,30 @@ public class Main {
     return "userPage";
   }
 
-  @PostMapping(path = "/delete_user_account")
-  public String deleteUserAccount(Map<String, Object> model) {
+  @PostMapping(path = "/delete_own_account")
+  public String deleteOwnAccount(Map<String, Object> model) {
+    
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
-    // working on it
 
-    // Optional Suggestion: if admin account or last admin account, prevent delete
-    // user account
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
 
-    return "redirect:/signup";
+      // Gets user currently logged in
+      Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      User curUser = (User) principal;
+
+      stmt.executeUpdate("DELETE FROM users WHERE id = " + curUser.getId());
+
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
+    }
+    return "redirect:/logout";
   }
 
   @PostMapping(path = "/delete_note/{pid}/{id}")
@@ -351,6 +368,8 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
     return ("redirect:/display_user/" + pid);
   }
@@ -373,6 +392,8 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
     return ("redirect:/view_notes");
   }
@@ -447,6 +468,8 @@ public class Main {
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
     }
     model.put("noteList", noteList);
     return "view_notes";
