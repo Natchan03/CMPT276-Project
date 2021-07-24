@@ -33,8 +33,8 @@ function loadVideo() {
     //load summernote api 
 
         $(document).ready(function() {
-            $('#summernote').summernote({width: 400,                
-                height: 400, disableResizeEditor:true, placeholder:'Enter notes here'});
+            $('#summernote').summernote({width: 725,                
+                height: 544, disableResizeEditor:true, placeholder:'Enter notes here'});
         });
 
     // returns data in summernotes text editor as html in as a string
