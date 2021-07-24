@@ -17,6 +17,10 @@
         </a>
         <h1 class="h3 mb-3 fw-normal text-white text-center">Login</h1>
         <form method="post" th:action="@{/login}">
+  
+          <div th:if="${errorMessage!= null}" th:text="${errorMessage}" class="alert alert-danger" role="alert">
+          </div>
+          
           <div class="form-group form-floating">
             <label class="text-white" for="newemail">Email address</label>
             <input type="email" class="form-control" id="email" name="username"  required placeholder="name@example.com">
