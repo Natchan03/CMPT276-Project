@@ -28,6 +28,11 @@
                     <td th:text="${note.videoId}"></td>
                     <td th:text="${#temporals.format(note.dateCreated, 'MMM dd, yyyy')}"></td>
                     <td th:text="${note.content}"></td>
+                    <td>
+                        <form action="#" method="post" th:action="@{'/delete_own_note/' + ${note.id}}">
+                            <input type="submit" value="Delete" style="color: black"/>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>

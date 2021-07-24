@@ -337,8 +337,26 @@ public class Main {
     return "redirect:/signup";
   }
 
-  @PostMapping(path = "/delete_note/{id}")
-  public String deleteNote(Map<String, Object> model, @PathVariable String id) {
+  @PostMapping(path = "/delete_note/{pid}/{id}")
+  public String AdminDeleteNote(Map<String, Object> model, @PathVariable String pid, @PathVariable String id) {
+    
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+      stmt.executeUpdate("DELETE FROM notes WHERE ownerId = " + pid + " AND id = " + id);
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+    return ("redirect:/display_user/" + pid);
+  }
+
+  @PostMapping(path = "/delete_own_note/{id}")
+  public String deleteOwnNote(Map<String, Object> model, @PathVariable String id) {
     
     // Gets user currently logged in
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -356,9 +374,8 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     }
-    return ("redirect:/display_user/" + curUser.getId());
+    return ("redirect:/view_notes");
   }
-
 
   @GetMapping(path = "/take_notes")
   public String getTakeNotes(Map<String, Object> model) {

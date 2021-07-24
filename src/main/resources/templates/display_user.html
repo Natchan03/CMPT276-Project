@@ -58,7 +58,7 @@
                     <td th:text="${#temporals.format(note.dateCreated, 'MMM dd, yyyy')}"></td>
                     <td th:text="${note.content}"></td>
                     <td>
-                        <form action="#" method="post" th:action="@{'/delete_note/' + ${note.id}}">
+                        <form action="#" method="post" th:action="@{'/delete_note/' + ${user.id} + '/' + ${note.id}}">
                             <input type="submit" value="Delete" style="color: black"/>
                         </form>
                     </td>
