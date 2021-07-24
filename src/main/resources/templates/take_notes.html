@@ -5,8 +5,10 @@
       <script th:src="@{/scripts/test.js}" defer></script>
   </head>
   <body>
-    <main>
+    
       <nav th:replace="fragments/common :: navbar"></nav>
+      <main >
+        <br><br>
       <div class="container">
         <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">  
           <div class="row" style="max-width: min-content;">
@@ -41,18 +43,19 @@
                 </div>
                
                 </div>
-                
               </div>
           </div>
         </form>
       </div>
-      </main>
-      <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
+      <br><br><br><br><br>
+    </main>
+    <footer th:replace="fragments/common :: foot"></footer> 
+      <!-- <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2021 Copyright:
           <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
           - All Rights Reserved
-        </div>
+        </div> -->
       </footer>
   </body>
 </html>
