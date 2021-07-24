@@ -54,10 +54,10 @@ function linkRestyle(videourl){
 //var url = processedURL.concat(strpreced,str);
 
 
-$(document).ready(function() {
-    $('#summernote').summernote({width: window.screen.width/2.25,                
-         height: window.screen.height/2, disableResizeEditor:true, placeholder:'Enter notes here'});
-});
+// $(document).ready(function() {
+//     $('#summernote').summernote({width: window.screen.width/2.25,                
+//          height: window.screen.height/2, disableResizeEditor:true, placeholder:'Enter notes here'});
+// });
 
  /* WORK IN PROGRESS
  function timeStamp(){

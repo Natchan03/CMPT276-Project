@@ -8,14 +8,37 @@
     <nav th:replace="fragments/common :: navbar"></nav>
 
     <main>
-      <div style=" margin: auto; max-width: 750px; text-align: center; height: 500px; color: white">
+      <div id="feedback">
+        
         <br> <h1 class="comment">User Feedback</h1>
         <form action="/index">
           <p>Your feedback will help us improve YouNote and provide users with the best note-taking experience.</p>
           <p>Please enter your first and last name.</p>
           <input type="text" name="fname" placeholder="first name"><br>
           <input type="text" name="lname" placeholder="last name"><br>
-        
+          <br>
+          <p> Plese rate your experience of using YouNote from 1-5 </p>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1">1</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">2</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">3</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">4</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">5</label>
+          </div>
+          <br>
           <br> <p> If you have any suggestions, please type them below:</p>
       
           <textarea class="form-control" ></textarea>

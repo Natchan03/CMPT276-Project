@@ -44,6 +44,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Optional;
 
 @Controller
 @SpringBootApplication
@@ -85,9 +88,9 @@ public class Main {
       stmt.executeUpdate(sql2);
 
       // Create timestamps table if not exists.
-      // Note the primary key is a combination of seconds and the foreign key to the id in the notes table
-      String sql3 = "CREATE TABLE IF NOT EXISTS timestamps "
-          + "(noteId bigint,seconds bigint,content varchar(300),"
+      // Note the primary key is a combination of seconds and the foreign key to the
+      // id in the notes table
+      String sql3 = "CREATE TABLE IF NOT EXISTS timestamps " + "(noteId bigint,seconds bigint,content varchar(300),"
           + "PRIMARY KEY(noteId,seconds),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
       System.out.println(sql3);
       stmt.executeUpdate(sql3);
@@ -200,7 +203,7 @@ public class Main {
         return "error";
       }
 
-      if (!Utils.isValidEmailAddress(user.getEmail())){
+      if (!Utils.isValidEmailAddress(user.getEmail())) {
         model.put("message", "Invalid Email Format (ex:name@example.com)");
         return "error";
       }
@@ -211,8 +214,8 @@ public class Main {
         model.put("message", "User Already Exists, Please Login");
         return "error";
       }
-      if (!rs.next()){
-        model.put("message", "You have Succesfully Signed Up" );
+      if (!rs.next()) {
+        model.put("message", "You have Succesfully Signed Up");
         return "success";
       }
 
@@ -236,8 +239,18 @@ public class Main {
   }
 
   @GetMapping(path = "/login")
+<<<<<<< HEAD
   public String getLoginPage(Map<String, Object> model) {
       return "login";
+=======
+  public String getLoginPage(@RequestParam("error") Optional<String> error, Map<String, Object> model) {
+
+    if (error.isPresent()) {
+
+      model.put("errorMessage", "Invalid e-mail or password.");
+    }
+    return "login";
+>>>>>>> 0b29dfa1da0b14ccfb3b3df3773d5e5a938c191b
   }
 
 
@@ -251,7 +264,7 @@ public class Main {
   }
 
   @GetMapping(path = "/display_user/{id}")
-  public String displayUser(Map<String, Object> model, @PathVariable String id){
+  public String displayUser(Map<String, Object> model, @PathVariable String id) {
     User user = new User();
     ArrayList<Note> noteList = new ArrayList<Note>();
     Connection connection = null;
@@ -274,11 +287,11 @@ public class Main {
       }
 
       rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + id);
-      while(rs.next()){
+      while (rs.next()) {
         Note note = new Note();
         note.setId(rs.getLong("id"));
         note.setDate(rs.getDate("dateCreated"));
-        //Shared ids tbd
+        // Shared ids tbd
         note.setTitle(rs.getString("title"));
         note.setVideoId(rs.getString("videoId"));
         noteList.add(note);
@@ -293,7 +306,7 @@ public class Main {
   }
 
   @PostMapping(path = "/delete_account/{id}")
-  public String deleteAccount(Map<String, Object> model, @PathVariable String id){
+  public String deleteAccount(Map<String, Object> model, @PathVariable String id) {
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -311,26 +324,27 @@ public class Main {
   }
 
   @GetMapping(path = "/userPage")
-  public String UserDashboard(Map<String, Object> model){
+  public String UserDashboard(Map<String, Object> model) {
     User user = new User();
     model.put("user", user);
     return "userPage";
   }
 
   @PostMapping(path = "/delete_user_account")
-  public String deleteUserAccount(Map<String, Object> model){
+  public String deleteUserAccount(Map<String, Object> model) {
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
-    //working on it
-    
-    // Optional Suggestion: if admin account or last admin account, prevent delete user account
-    
+    // working on it
+
+    // Optional Suggestion: if admin account or last admin account, prevent delete
+    // user account
+
     return "redirect:/signup";
   }
 
   @PostMapping(path = "/delete_note/{pid}/{id}")
-  public String deleteNote(Map<String, Object> model, @PathVariable String pid, @PathVariable String id){
+  public String deleteNote(Map<String, Object> model, @PathVariable String pid, @PathVariable String id) {
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -340,7 +354,7 @@ public class Main {
 
       // Gets user currently logged in
       Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      User curUser = (User)principal;
+      User curUser = (User) principal;
 
       stmt.executeUpdate("DELETE FROM notes WHERE ownerId = " + curUser.getId() + " AND id = " + id);
 
@@ -360,6 +374,7 @@ public class Main {
 
   @PostMapping(path = "/take-notes", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handleTakeNotesSubmit(Map<String, Object> model, Note note) throws Exception {
+
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -367,18 +382,21 @@ public class Main {
     try {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
-      
-      // Clean and get other note parameters
+
+      // Set youtube ID from youtube URL
       String videoUrl = note.getVideoId();
-      String actualVideoId = videoUrl.substring(videoUrl.lastIndexOf("v=") + 2);
+      String actualVideoId = videoUrl.substring(videoUrl.indexOf("watch") + 8);
+      actualVideoId = actualVideoId.substring(0, 11);
       note.setVideoId(actualVideoId);
+
+      // Set other parameters
       Date newDate = new Date();
       note.setDate(newDate);
       Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      User curUser = (User)principal;
+      User curUser = (User) principal;
       note.setOwnerId(curUser.getId());
 
-      String sql = "INSERT INTO notes(videoId, title, dateCreated, ownerId) VALUES ('" + note.getVideoId() + "','" 
+      String sql = "INSERT INTO notes(videoId, title, dateCreated, ownerId) VALUES ('" + note.getVideoId() + "','"
           + note.getTitle() + "','" + note.getDate() + "','" + note.getOwnerId() + "') ";
       System.out.println("Inserting in notes table: " + sql);
       // System.out.println(rawContent);

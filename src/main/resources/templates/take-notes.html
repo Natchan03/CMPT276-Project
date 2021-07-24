@@ -10,21 +10,32 @@
         <form action="#" method="post" th:action="@{/take-notes}" th:object="${note}">  
           <div class="row" style="max-width: min-content;">
               <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
-                <iframe  width="725" height="595" id="getvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe  
+                width="725" 
+                height="595" 
+                id="getvideo" 
+                
+                
+                frameborder="0" 
+                style="border: solid 4px #23a3ff"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" 
+                >
+              </iframe>
               
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" ></input>
+                  <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                   <div class="input-group-append" >
-                    <button onclick="loadVideo()" class="btn btn-light" type="button">Load Video</button>
+                    <button onclick="loadVideo()" class="btn btn-primary" type="button">Load Video</button>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-6" style="position:relative;  left:450px;">
-                <div id="summernote" th:text="${rawContent}"></div>
-                <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title to your Notes before saving"></input>
-                  <div class="input-group-append" >
-                    <button  class="btn btn-light" type="submit">Save Notes</button>
+              <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
+                <div id="summernote" th:text="${rawContent}" ></div>
+                <div class="input-group sm-3" style="width:725; position:relative; top:25px;">
+                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" sec:authorize="isAuthenticated()">Save Notes</button>
+                    <div class="btn btn-primary" sec:authorize="!isAuthenticated()">Login to Save Notes</div>
                   </div>
                 </div>
                
@@ -34,7 +45,14 @@
           </div>
         </form>
       </div>
-  
+      <footer class="footer bg-dark text-center text-white fixed-bottom" style="background-color: rgb(33, 37, 41)">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2021 Copyright:
+          <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
+          - All Rights Reserved
+        </div>
+      </footer>
+      
 
   </body>
   </html>
