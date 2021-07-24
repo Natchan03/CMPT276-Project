@@ -12,9 +12,6 @@
   <main>
     <div class= "signup">
       <div class="form-signin" >
-        <a class="navbar-brand" href="" style="color:#23a3ff;">
-          <img src="../img/Icon.png" width="35" height="30"  class="d-inline-block align-top" alt="">YouNote
-        </a>
         <h1 class="h3 mb-3 fw-normal text-white text-center">Create your account</h1>
         <form action="#" method="post" th:action="@{/user}" th:object="${user}">
           <div class="form-group form-floating">
@@ -40,7 +37,7 @@
           <button class="w-100 btn btn-lg btn-primary " id="newbutton" value="Create my account" type="submit">Sign up</button>
         </form>
       </div>
-    </div>
+      </div>
   </main>
 
   <footer th:replace="fragments/common :: foot"></footer> 
