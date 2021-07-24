@@ -31,7 +31,7 @@
             <a class="nav-link px-2 text-secondary" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-2 text-white" href="/take_notes">Take Notes</a>
+            <a class="nav-link px-2 text-white" href="/take-notes">Take Notes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link px-2 text-white" href="/tutorial">Tutorial</a>
@@ -55,7 +55,6 @@
             <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png" alt="mdo" width="42" height="42" class="rounded-circle">
           </a>
           <ul class="dropdown-menu dropdown-menu-right text-small" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="/view_notes">View Notes</a></li>
             <li><a class="dropdown-item" href="/logout">Sign out</a></li>
           </ul>
         </div>
@@ -64,7 +63,7 @@
     </div>
   </header>
 
-  <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41) !important" th:fragment="foot" >
+  <footer class="footer bg-dark text-center text-white " style="background-color: rgb(33, 37, 41) !important" th:fragment="foot" >
     <div class="container p-4">
       <section class="">
         <div class="row">
@@ -87,6 +86,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            
             <!-- <div sec:authorize="!isAuthenticated()">
               <h5 class="text">Start using YouNote</h5>
               <ul class="list-unstyled mb-0">
@@ -101,7 +101,9 @@
           </div>
       
           <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <img src="../img/FLRB.png" height="60" alt="">
+            <a class="navbar-brand" href="/" style="color:#23a3ff;">
+              <img src="../img/Icon.png" width="35" height="30"  class="d-inline-block align-top" alt="">YouNote
+            </a>
             <br> <p>YouNote is a web application that enables its users to take and save notes on YouTube videos, where each note is associated with a timestamp in the video.</p>
           </div>
         </div>
