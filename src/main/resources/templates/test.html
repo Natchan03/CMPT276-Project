@@ -5,6 +5,7 @@
       <script th:src="@{/scripts/test.js}" defer></script>
   </head>
   <body>
+  <main>
       <nav th:replace="fragments/common :: navbar"></nav>
       <div class="container">
         <form action="#" method="post"  th:object="${note}">  
@@ -45,6 +46,7 @@
           </div>
         </form>
       </div>
+      </main>
       <footer class="footer bg-dark text-center text-white " style="background-color: rgb(33, 37, 41)">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2021 Copyright:
