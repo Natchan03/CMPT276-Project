@@ -55,6 +55,7 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
+
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
   }
@@ -236,8 +237,9 @@ public class Main {
 
   @GetMapping(path = "/login")
   public String getLoginPage(Map<String, Object> model) {
-    return "login";
+      return "login";
   }
+
 
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
   public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
