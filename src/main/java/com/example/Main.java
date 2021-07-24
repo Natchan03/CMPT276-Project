@@ -58,7 +58,6 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
-
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
   }
@@ -239,10 +238,6 @@ public class Main {
   }
 
   @GetMapping(path = "/login")
-<<<<<<< HEAD
-  public String getLoginPage(Map<String, Object> model) {
-      return "login";
-=======
   public String getLoginPage(@RequestParam("error") Optional<String> error, Map<String, Object> model) {
 
     if (error.isPresent()) {
@@ -250,9 +245,7 @@ public class Main {
       model.put("errorMessage", "Invalid e-mail or password.");
     }
     return "login";
->>>>>>> 0b29dfa1da0b14ccfb3b3df3773d5e5a938c191b
   }
-
 
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
   public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
