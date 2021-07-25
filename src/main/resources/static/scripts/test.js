@@ -43,8 +43,8 @@ function loadVideo() {
     //"<p><a href=\"https://www.youtube.com/watch?v=ARbZKCI6EFY&amp;t=90s\" target=\"_blank\" style=\"background-color: rgb(255, 255, 255); font-size: 1rem;\">1m:30s</a></p><p><br></p><p><br></p>"
     
     function getNotes() {         
-        var txt= $("#summernote").summernote("code"); 
-        return txt}
+        $('#noteText').val($("#summernote").summernote("code"));
+    }
     
     // load notes will take output saved by getNotes into the data base
     // inject the data back into summernotes as formatted by user before executing getNotes()

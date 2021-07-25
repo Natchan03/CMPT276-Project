@@ -11,7 +11,7 @@
 
     <main>
         <div class="container">
-            <h1>User info</h1>
+            <h1>User Info</h1>
             <table class="table table-dark">
                 <thead>
                 <tr>
@@ -32,13 +32,15 @@
                 </tr>
                 </tbody>
             </table>
-            <h2>Delete an account</h2>
+            <h2>Delete an Account</h2>
             <form action = "#" method="post" th:action="@{'/delete_account/' + ${user.id}}">
                 <p>Type DELETE here if you are you sure that you want to delete this account</p>
                 <input type="text" id="deleteBox" style="color: black; "><br>
                 <p></p>
                 <input th:access_type="${user.type}" type="submit" value="Delete" onclick="return check(this.getAttribute('access_type'))" style="color: black"/><br>
             </form>
+            <br/><br/>
+            <h2>User's Saved Notes</h2>
             <table class="table table-dark">
                 <thead>
                 <tr>
@@ -56,7 +58,7 @@
                     <td th:text="${note.title}"></td>
                     <td th:text="${note.videoId}"></td>
                     <td th:text="${#temporals.format(note.dateCreated, 'MMM dd, yyyy')}"></td>
-                    <td th:text="${note.content}"></td>
+                    <td th:utext="${note.content}"></td>
                     <td>
                         <form action="#" method="post" th:action="@{'/delete_note/' + ${user.id} + '/' + ${note.id}}">
                             <input type="submit" value="Delete" style="color: black"/>

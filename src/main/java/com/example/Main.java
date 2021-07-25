@@ -288,6 +288,7 @@ public class Main {
         //Shared ids tbd
         note.setTitle(rs.getString("title"));
         note.setVideoId(rs.getString("videoId"));
+        note.setContent(rs.getString("content"));
         noteList.add(note);
       }
     } catch (Exception e) {
@@ -462,6 +463,7 @@ public class Main {
         note.setTitle(rs.getString("title"));
         note.setVideoId(rs.getString("videoId"));
         note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
+        note.setContent(rs.getString("content"));
         //Shared ids tbd
         noteList.add(note);
       }
