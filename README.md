@@ -1,4 +1,4 @@
-# Requirements & Specification Document: Iteration 1
+# YouNote Requirements & Specification Document: Iteration 2
 
 ## Project Abstract
 YouNote is a web application which allows users to take and save notes on YouTube videos, where each note is associated with a timestamp in the video. Notes are written in a text input within a form, which also contains a “time” input for the timestamp and are located besides an embedded video in the same window. The notes can be saved by clicking a button to submit the form only if the user is logged into an account to associate the note with the account. In a page to view and share saved notes, admin accounts can modify or delete saved notes from their own account and standard accounts, whereas standard accounts can modify and delete their own saved notes.
@@ -11,46 +11,58 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 
 ## User Stories
 
-### Iteration 1: Signup and login for regular users
-* Alex (User) is a university student who wishes to take notes while watching a YouTube video of his instructor using YouNote. As he is a new user to the application, he will first sign up to make an account in YouNote. By clicking on the “Signup” button, he will see text fields where he registers his first name, last name, and email; and inputs his desired password. After entering this information, he clicks the “Create my account” button to register his account.
-  * After creating an account, he can log in to his account by entering his registered email and password in the text fields provided and then click on the “Log In” button. Once logged in, it will show “Welcome Alex” indicating he has logged into his account. There will be a “Logout” button in the top-right dropdown menu which he can click to logout of his account.
-  * For error cases when signing up, not entering input in any of the text fields will display an error page with the first error encountered.
+### Iteration 1: Signup
+* Alex (User) is a university student who wishes to take notes while watching a YouTube video of his instructor using YouNote. As he is a new user to the application, he will first sign up to make an account in YouNote. By clicking on the “Signup” button, he will see text fields where he can register his first name, last name, email, and desired password. After entering this information, he clicks the “Create my account” button to register his account.
+  * For error cases when submitting, not entering input in any of the text fields will display an error page with the first error encountered. Entering an invalid email will generate an appropriate error message. If the email has already been used to register for this application, an error message will indicate that the user already exists.
+
+### Iteration 1: Login
+* If Alex (User) wants to access his account in YouNote, he can click on the “Login” button on the navbar to access the login page. He then enters his account’s email and password and clicks the “Login” button. There is a “Sign out” button in the dropdown menu on the right side of the navbar which the admin can click to log out of his account.
   * For error cases when logging in, entering the incorrect credentials will redirect the user back to the login page with cleared inputs.
+  * An appropriate error message will appear if Alex tries to submit with an invalid email format, or submits without text in the email address or password field.
+  * A default admin account will automatically be created when the application starts. An admin will also see an “Admin Dashboard” button when they log in. The admin account is registered with an email “admin@younote.com” and password “admin”.
 
-### Iteration 1: Login for admin user
-* A default admin account will automatically be created when the application starts. If the admin wants to access his account in YouNote, he enters the email and password of the admin account in the login page and clicks the “Log In” button. Once the admin is logged in, the page will show “Welcome admin” to indicate that the admin has logged in. An admin will also see an “Admin Dashboard” button. There is a “Logout” button which the admin can click to log out of his account.
-* The admin account is registered with an email “admin@younote.com” and password “admin”.
+### Iteration 1: Admin can view users database
+* Once an admin logs into an admin account, he will be able to click on the “Admin Dashboard” to view information in the users database, including the user ID, first name, last name, email, and type of account. The admin will not be able to view the hashed password of accounts on the dashboard page for security purposes.
 
-### Iteration 1: Viewing Users database from admin account
-* Once an admin logs into an admin account, he will be able to click on the “Admin Dashboard” to view information in the Users database, including the ID, first name, last name, email, and type of account. The admin will not be able to view the hashed password of accounts on the dashboard page for security purposes.
+### Iteration 1: Tutorial
+* If Alex (User) wants to know how the application works, he can click on the ‘Tutorial’ button on the homepage which will give him a brief description of the application and how to use it.
 
-### Iteration 1: Tutorial, test page, and providing feedback
-* Alex (User) wants to know how the application works, test it, and provide feedback about it.
-He can click on the tutorial button on the homepage which will give him a brief description of the application and how to use it.
-  * He will have an option to test it as well. He can click on the “Test” button to load a test page. This will show him a rough layout of what the application looks like and how it will work. It will have a search box where he can enter the URL of a YouTube video and click on “Load Video” to load an embedded video from the URL. On the test page, there is also a textbox where he can take notes while watching the video.
-  * The test page currently does not have the option to save notes.
-  * Clicking on the “Upcoming Features” button on the navigation bar allows Alex to view all upcoming features of the application.
-  * Alex can give feedback on the app by clicking the “Feedback” link, found in both the dropdown menu and footer. The feedback page has an option for him to enter his first name, last name, and any suggestions he would like to provide about the app.
-  * If Alex enters an incorrect YouTube URL on the “Test” page, a crash page embedded in the page will be shown where the embedded video is supposed to be.
+### Iteration 1: Feedback
+* Alex can give feedback on the app by clicking the “Feedback” link, found in both the dropdown menu and footer. The feedback page has an option for him to enter his first name, last name, and any suggestions he would like to provide about the app.
 
-## User Stories for Iterations 2 and 3
+### Iteration 2: Admin can delete regular user accounts
+* The admin has the ability to delete any regular user account. The admin must log in to their admin account and click on “Admin Dashboard” to see all user accounts, including their own. The admin can click on the user ID for a user to see a text input. Writing “DELETE” on this input and clicking on “Delete” will delete the user account. The admin is unable to delete their own or other admin accounts.
 
-### Iteration 2
-* Users will be able to search for a video in the application.
-* Users will have an option to save, edit, or share their notes.
-* Notes will be associated with a timestamp in the video.
-* Regular users will have an option to delete their own notes if they wish to.
-* Admin users will have an option to modify or delete notes from standard accounts.
-* Users can delete their own accounts.
-* Admins can delete any regular account.
-* Users can click on a “Forgot Password?” link to reset their passwords.
+### Iteration 2: Admin can view and delete notes from user accounts
+* After the admin has logged in to their admin account, clicking on “Admin Dashboard” and then clicking on a user ID will show all the saved notes for that user ID. The admin can then click on “Delete” on the row of a specific note to delete that note.
+
+### Iteration 2: Save notes
+* Alex (User) wishes to take notes and save it. He needs to log in first to be able to save notes. Once logged in, Alex clicks on the “Take Notes” tab to access the note-taking page. He then enters a URL for a Youtube Video on the appropriate text input and clicks the “Load Video” button to load the embedded video. Alex can then enter a title in the appropriate input and write notes in the large textbox. When Alex is done writing his notes, he clicks on “Save Notes” to save his notes.
+
+### Iteration 2: Users can view and delete their notes
+* After logging in, Alex (User) can view his saved notes by clicking on “View Notes” on the dropdown menu on the right side of the navbar. Clicking on “Delete” on the row for a note will delete that note.
+
+### Iteration 2: Users can delete their account
+* Suppose Alex (User) wants to delete his account. After Alex logs in, they can click on “User Dashboard”. Alex will then type “DELETE” in the input and click on the “Delete” button to delete his account. Afterwards, Alex will be logged out and his account will be deleted.
+
+### Iteration 2: Included test cases for classes
+* Test cases were included for the User, Note, and Timestamp classes using the JUnit framework.
+
+
+## User Stories for Iteration 3
 
 ### Iteration 3
+* Notes will be associated with a timestamp in the video.
+* Admin users will have an option to modify or delete notes from standard accounts.
+* Users will be able to search for a video in the application.
+* Users can click on a “Forgot Password?” link to reset their passwords.
+* Users will be able to edit and share their notes.
 * Users will be able to unshare their videos and notes.
 * Users, particularly instructors, will be able to share videos to multiple users at once.
 * In the User's account, there will be a “Watched Videos” page which will show the history of videos for which the user has saved notes for.
 * In the User's account, there will be a “Shared With Me” page which will show videos and notes that other users have shared.
 * Users will be able to add videos and notes to their favorites.
+
 
 ## User Interface Requirements
 
