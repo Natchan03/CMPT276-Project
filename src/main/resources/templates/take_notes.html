@@ -1,61 +1,62 @@
 <html>
-  <head>
-      <title>Take Notes</title>
-      <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
-      <script th:src="@{/scripts/test.js}" defer></script>
-  </head>
-  <body>
-      <nav th:replace="fragments/common :: navbar"></nav>
-      <div class="container">
-        <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">  
-          <div class="row" style="max-width: min-content;">
-              <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
-                <iframe  
-                width="725" 
-                height="595" 
-                id="getvideo" 
-                
-                
-                frameborder="0" 
-                style="border: solid 4px #23a3ff"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" 
+<head>
+    <title>Take Notes</title>
+    <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+    <script th:src="@{/scripts/test.js}" defer></script>
+</head>
+<body>
+<nav th:replace="fragments/common :: navbar"></nav>
+<div class="container">
+    <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
+        <div class="row" style="max-width: min-content;">
+            <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
+                <iframe
+                        width="725"
+                        height="595"
+                        id="getvideo"
+                        src=""
+
+
+                        frameborder="0"
+                        style="border: solid 4px #23a3ff"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
                 >
-              </iframe>
-              
-                <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
-                  <input type="text" id="input_field" class="form-control" th:field=${note.videoId} placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
-                  <div class="input-group-append" >
-                    <button onclick="loadVideo()" class="btn btn-primary" type="button">Load Video</button>
-                  </div>
+                </iframe>
+
+                <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
+                    <input type="text" id="input_field" class="form-control" th:field="${note.videoId}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
+                    <div class="input-group-append" >
+                        <button onclick="return loadVideo()" class="btn btn-primary" type="button">Load Video</button>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
+            </div>
+            <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
                 <div id="summernote"></div>
                 <input id="noteText" th:field="${note.content}" hidden />
-                <div class="input-group sm-3" style="width:725; position:relative; top:25px;">
-                  <input type="text" class="form-control" th:field=${note.title} placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" onclick="getNotes()">Save Notes</button>
-                  </div>
+                <div class="input-group sm-3" style="width: 725px; position:relative; top:25px;">
+                    <input type="text" class="form-control" id = "note_title"  th:field="${note.title}" placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" onclick="return getNotes()">Save Notes</button>
+                    </div>
                 </div>
-               
-                </div>
-                
-              </div>
-          </div>
-        </form>
-      </div>
-      <br><br><br><br><br>
-      </main>
-      <br>
-      <footer th:replace="fragments/common :: foot"></footer> 
-      <!-- <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
-      <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2021 Copyright:
-          <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
-          - All Rights Reserved
-        </div -->
-      </footer>
-  </body>
+
+            </div>
+
+        </div>
+</div>
+</form>
+</div>
+<br><br><br><br><br>
+</main>
+<br>
+<footer th:replace="fragments/common :: foot"></footer>
+<!-- <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
+<footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
+    - All Rights Reserved
+  </div -->
+</footer>
+</body>
 </html>
