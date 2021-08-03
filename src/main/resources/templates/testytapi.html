@@ -1,33 +1,44 @@
 <html>
 <head>
     <title>testing api controls</title>
+    
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
-<script th:src="@{/scripts/common.js}" defer></script>
-</head>
+    <script th:src="@{/scripts/common.js}" defer></script>
+    
+
+  </head>
 <body>
     <nav th:replace="fragments/common :: navbar"></nav>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-sm-6" style="position:relative; left: 9rem" >
-                    <iframe id="existing-iframe-example"
+                    <iframe id="frameAPI"
 
                             width="750" height="595"
-                            src="https://www.youtube.com/embed/ARbZKCI6EFY?enablejsapi=1"
+                            
                             frameborder="0"
                             style="border: solid 4px #37474F">
                     </iframe>
             </div>
-            <div class="col-sm-6">
-              
+            <div class="col-sm-6 " id="summernote" >
+
+       
               
             </div>
+            
         </div>
     </div>
     <div style="width:650px; position:relative; left: 190px;">
-        <input type="text" id="input_field" style="width:500px;" placeholder="Enter YouTube video URL" >
-        <button onclick="loadVideo()">Load Video</button>
+        <input type="text" id="input_field2" style="width:500px;" placeholder="Enter YouTube video URL" >
+        <button onclick="loadVideo2()">Load Video</button>
+        
+        
+
       </div>
-      
+      <div>
+        
+      </div>
 
 
 
@@ -40,7 +51,7 @@
 
   var player;
   function onYouTubeIframeAPIReady() {
-    player = new YT.Player('existing-iframe-example', {
+    player = new YT.Player('frameAPI', {
 
         events: {
           'onReady': onPlayerReady,
@@ -49,7 +60,7 @@
     });
   }
   function onPlayerReady(event) {
-    document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
+    document.getElementById('frameAPI').style.borderColor = '#FF6D00';
   }
   function changeBorderColor(playerStatus) {
     var color;
@@ -65,7 +76,7 @@
       color = "#AA00FF"; // buffering = purple
     }
     if (color) {
-      document.getElementById('existing-iframe-example').style.borderColor = color;
+      document.getElementById('yt').style.borderColor = color;
     }
   }
   function onPlayerStateChange(event) {
@@ -73,4 +84,4 @@
   }
 </script>
 </body>
-</html>
+</html>s

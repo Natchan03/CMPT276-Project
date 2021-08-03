@@ -39,10 +39,25 @@ function getvideoID() {
 
 //load summernote api
 
+
 $(document).ready(function() {
-    $('#summernote').summernote({width: 725,
-        height: 544, disableResizeEditor:true, placeholder:'Enter notes here'});
-});
+    $('#summernote').summernote({
+  
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['fontname', ['fontname']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture']],
+        ['view', [ 'help']],
+      ],
+  
+        width: 725,
+        height: 543, disableResizeEditor:true, placeholder:'Enter notes here'});
+      });
+  
 
 // returns data in summernotes text editor as html in as a string
 // tested for links formatted with a sperate show as for eg https://www.youtube.com/watch?v=ARbZKCI6EFY&t=90s link, appears in summernotes as 1m:30s
@@ -131,6 +146,4 @@ function linkToTimedlink(videourl,t){
 }
 //var links= linkToTimedlink("https://www.youtube.com/watch?v=8EHEvx4eGlQ","2m40s")
 //returns links="https://www.youtube.com/watch?v=8EHEvx4eGlQ&t=2m40s"
-
-
 

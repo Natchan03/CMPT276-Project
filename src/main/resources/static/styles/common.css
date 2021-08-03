@@ -92,4 +92,20 @@ div.signup {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-  
+
+#embed_ts{
+    color: #000000;
+    background-color: rgb(255, 255, 255);
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left:0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right:0px;
+    width:fit-content;
+    height: fit-content;
+}
+
