@@ -87,7 +87,7 @@ function inject_ts_html(){
 // makes every word a timestamp 
 var total_func_calls=0
     document.addEventListener('keydown', (e) => {
-      if (e.code === "Space" ||total_func_calls === 0) {
+      if (e.code === "Enter" ||total_func_calls === 0) {
         var HTMLstring = inject_ts_html();
         $('#summernote').summernote('pasteHTML', HTMLstring);
         total_func_calls++;
