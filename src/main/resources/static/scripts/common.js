@@ -1,3 +1,5 @@
+
+
 function loadVideo2() {
   var videourl = document.getElementById("input_field2").value;
   if(videourl === ""){
@@ -84,7 +86,7 @@ function inject_ts_html(){
 }
 
 
-// makes every word a timestamp 
+// on press Enter, start a section as timestamp and end to start a new one when Enter is pressed again
 var total_func_calls=0
     document.addEventListener('keydown', (e) => {
       if (e.code === "Enter" ||total_func_calls === 0) {

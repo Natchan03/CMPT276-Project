@@ -28,6 +28,7 @@ function linkRestyle(videourl){
 
 }
 
+
 //extracts videoid from a youtube url
 function getvideoID() {
 
@@ -89,37 +90,6 @@ function loadNotes(txt) {
 
 }
 
-//  function linkRestyle(videourl){
-
-//      if(!videourl.includes("https://")){
-//          videourl = "https://" + videourl;
-//      }
-//      if(videourl.includes("youtu.be")){
-//          videourl = videourl.substring(0, 8) + "www.youtube.com/embed" + videourl.substring(16);
-//      }
-//      else{
-//          if(videourl.includes("watch?")){
-//              var index = videourl.indexOf("watch?");
-//              videourl = videourl.substring(0, index) + "embed/" + videourl.substring(index + 6);
-//          }
-//          if(videourl.includes("v=")){
-//              index = videourl.indexOf("v=");
-//              videourl = videourl.substring(0, index) + videourl.substring(index + 2);
-//          }
-//      }
-//      return videourl;
-//  };
-//for future improvents of linkRestyle function---
-//instead of using linkRestyle here's a simple solution which,
-// take a url as input,conducts -> boolean search for ((youtu.be or youtube) and watch) in the input link to assess its validity
-// and then converts a valid link to one usable by iFrame api
-// by extracting video ID from a valid link, which could be appended to https://www.youtube.com/embed/ to get a iFrame compatible url.
-//heres a console example implemented to search only for watch in the link and convert it to iFram compatible form.
-//let str = "https://www.youtube.com/watch?v=cCBSsh3whvU";
-//let strpreced= "https://www.youtube.com/embed/"
-//let processedURL=""
-//str=str.substr(str.search("watch")+8, );
-//var url = processedURL.concat(strpreced,str);
 
 /* WORK IN PROGRESS
 function timeStamp(){
@@ -128,22 +98,46 @@ function timeStamp(){
     $('#summernote').summernote('pasteHTML', HTMLString);
 };
 */
+//tester function to be replaced with get_time function
+//that uses iframes api to return exact video playtime 
+// for now evry word is 10 seconds apart
+var time_in_seconds=0;
+function get_timestamp(){
+  time_in_seconds=time_in_seconds+10;
+  return time_in_seconds;
+}//returns time in t 
 
-// function below takes a videourl, and a timestamp T from timestamp function above in format(XmYs where X and y are numbers) to convert it into a timed youtube link
-function linkToTimedlink(videourl,t){
-
-    var processedURL="";
-    var strpreced="https://www.youtube.com/watch?v="  // reprocessing of the link
-    var strsucced="&t=".concat(t)
-    if((videourl.includes("youtube") || videourl.includes("youtu.be")) && videourl.includes("watch"))
-    {
-        videourl=videourl.substr(videourl.search("watch")+8,);
-        videourl=videourl.slice( 0, 11);
-        var url=processedURL.concat(strpreced,videourl);
-        var url = url.concat(strsucced);
-        return url;
+  
+//function to load video at time t, after clicking on a timestamp . (time t should be in seconds )
+  function Timestamp_embed(t){
+    var videourl = document.getElementById("input_field").value;
+    var url = linkRestyle(videourl);
+    var play = "&autoplay=1"
+    var strsucced="&start=".concat(t,play);
+    url = url.concat(strsucced);
+    document.getElementById("getvideo").src=url;
     }
+    
+    //var links= linkToTimedlink("https://www.youtube.com/watch?v=8EHEvx4eGlQ","120s")
+    //returns links="https://www.youtube.com/watch?v=8EHEvx4eGlQ&start=120s"
+
+// converts html to add timestamps into a string, to be injected into summernotes text editor
+function inject_ts_html(){
+  var t = get_timestamp();
+  var strpreced ='<button id="embed_ts" class="btn btn-light" onclick="Timestamp_embed(';
+  var strsucced =')"></button>';
+  var html_ts = strpreced.concat(t,strsucced);
+  return html_ts;
 }
-//var links= linkToTimedlink("https://www.youtube.com/watch?v=8EHEvx4eGlQ","2m40s")
-//returns links="https://www.youtube.com/watch?v=8EHEvx4eGlQ&t=2m40s"
+
+
+// on press Enter, start a section as timestamp and end to start a new one when Enter is pressed again
+var total_func_calls=0
+    document.addEventListener('keydown', (e) => {
+      if (e.code === "Enter" ||total_func_calls === 0) {
+        var HTMLstring = inject_ts_html();
+        $('#summernote').summernote('pasteHTML', HTMLstring);
+        total_func_calls++;
+      }
+  })
 
