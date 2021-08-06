@@ -27,18 +27,18 @@
         <p sec:authorize="!isAuthenticated()" class="lead">YouNote is a web app allowing for a seamless integration between note-taking and watching YouTube videos.<br>
         You can take, view, edit, and share notes online anytime for free.
         </p>
-        <p sec:authorize="isAuthenticated()" class="lead">Welcome Back!</p>
+        <h2 sec:authorize="isAuthenticated()" class="lead">Welcome Back!</h2>
         <br>
         <p class="lead">
       
-          <a href="/test" class="btn btn-lg btn-primary" sec:authorize="!isAuthenticated()">Try Younote</a>
-          <a href="/login" class="btn btn-lg btn-primary" sec:authorize="!isAuthenticated()">Log In</a>
+          <a href="/test" class="btn btn-lg btn-primary" style="width:180px" sec:authorize="!isAuthenticated()">Try Younote</a>
+          <a href="/login" class="btn btn-lg btn-primary" style="width:180px" sec:authorize="!isAuthenticated()">Log In</a>
           <a href="/take_notes" class="btn btn-lg btn-primary"  sec:authorize="isAuthenticated()">Start Taking Notes</a>
           <a href="/view_notes" class="btn btn-lg btn-primary"  sec:authorize="isAuthenticated()"> View Saved Notes </a>
       
         </p>
         </div>
-      </main>
+     </main>
     </div>
     <footer th:replace="fragments/common :: foot"></footer> 
   </body>
