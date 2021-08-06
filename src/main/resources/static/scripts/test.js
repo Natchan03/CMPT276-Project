@@ -101,6 +101,7 @@ function timeStamp(){
     $('#summernote').summernote('pasteHTML', HTMLString);
 };
 */
+
 //tester function to be replaced with get_time function
 //that uses iframes api to return exact video playtime 
 // for now evry word is 10 seconds apart

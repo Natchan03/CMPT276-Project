@@ -3,9 +3,6 @@
     <title>testing api controls</title>
     
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
-    <script th:src="@{/scripts/common.js}" defer></script>
-    
-
   </head>
 <body>
     <nav th:replace="fragments/common :: navbar"></nav>
@@ -30,8 +27,8 @@
         </div>
     </div>
     <div style="width:650px; position:relative; left: 190px;">
-        <input type="text" id="input_field2" style="width:500px;" placeholder="Enter YouTube video URL" >
-        <button onclick="loadVideo2()">Load Video</button>
+        <input type="text" id="input_field" style="width:500px;" placeholder="Enter YouTube video URL" >
+        <button onclick="loadVideo()">Load Video</button>
         
         
 
