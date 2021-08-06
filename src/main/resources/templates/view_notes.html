@@ -31,7 +31,7 @@
                     <td th:utext="${note.isShared}"></td>
                     <td>
                         <!--th:action should be modified for edit feature-->
-                        <form action="#" method="post" th:action= "@{'/'}" th:if="${note.isEditable == true}" style="margin:5px">
+                        <form action="#" method="post" th:action= "@{'/edit_own_note/' + ${note.id}}" th:if="${note.isEditable == true}" style="margin:5px">
                             <button type="submit" class="btn btn-outline-light">Edit</button>
                         </form>
                        

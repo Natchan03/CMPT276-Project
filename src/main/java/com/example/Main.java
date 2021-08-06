@@ -594,6 +594,42 @@ public class Main {
     return "view_content";
   }
 
+  @PostMapping(path = "/edit_own_note/{id}")
+  public String editOwnNotes(Map<String, Object> model, @PathVariable String id) {
+    
+    // Gets user currently logged in
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User curUser = (User) principal;
+
+    ArrayList<Note> noteList = new ArrayList<Note>();
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    //getting notes that user had saved
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+      rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + curUser.getId());
+      while(rs.next()){
+        Note note = new Note();
+        note.setId(rs.getLong("id"));
+        note.setTitle(rs.getString("title"));
+        note.setVideoId(rs.getString("videoId"));
+        note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
+        note.setContent(rs.getString("content"));
+        noteList.add(note);
+    }
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
+    }
+    model.put("noteList", noteList);
+    return "take_notes";
+  }
+  
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
