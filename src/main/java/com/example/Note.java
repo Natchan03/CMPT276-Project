@@ -14,6 +14,7 @@ public class Note {
     private LocalDate dateCreated;
     private long ownerId;
     private long[] sharedIds;
+    private boolean isShared;
 
     // Getters
     public long getId() {
@@ -44,6 +45,10 @@ public class Note {
         return this.sharedIds;
     }
 
+    public boolean getIsShared() {
+        return this.isShared;
+    }
+
     // Setters
     public void setId(long newId) {
         this.id = newId;
@@ -64,7 +69,7 @@ public class Note {
     public void setDateCreated(LocalDate newDateCreated) {
         this.dateCreated = newDateCreated;
     }
-    
+
     public void setOwnerId(long newOwnerId) {
         this.ownerId = newOwnerId;
     }
@@ -73,5 +78,10 @@ public class Note {
         this.sharedIds = newSharedIds;
     }
 
-    // Iteration 3 TO-DO: Methods to insert (share) or remove (unshare) a single or multiple shared id.
+    public void setisShared(boolean newIsShared) {
+        this.isShared = newIsShared;
+    }
+
+    // Iteration 3 TO-DO: Methods to insert (share) or remove (unshare) a single or
+    // multiple shared id.
 }

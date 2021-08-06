@@ -11,12 +11,15 @@ public class Utils {
         try {
             if (rs != null) {
                 rs.close();
+                rs = null;
             }
             if (stmt != null) {
                 stmt.close();
+                stmt = null;
             }
             if (connection != null) {
                 connection.close();
+                connection = null;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
