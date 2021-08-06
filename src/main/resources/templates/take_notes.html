@@ -7,6 +7,7 @@
 </head>
 <body>
 <nav th:replace="fragments/common :: navbar"></nav>
+<br><br>
 <div class="container">
     <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
         <div class="row" style="max-width: min-content;">
@@ -15,7 +16,6 @@
                         width="725"
                         height="595"
                         id="getvideo"
-                        src=""
 
 
                         frameborder="0"
@@ -47,9 +47,8 @@
 </div>
 </form>
 </div>
-<br><br><br><br><br>
+<br><br><br><br>
 </main>
-<br>
 <footer th:replace="fragments/common :: foot"></footer>
 <!-- <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
 <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">

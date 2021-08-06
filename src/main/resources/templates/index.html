@@ -10,7 +10,9 @@
   <body class="text text-center">
   
     <nav th:replace="fragments/common :: navbar"></nav>
-
+    <br>
+    <br>
+    <br>
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column vertical-center">
       
       <header class="masthead mb-auto">
@@ -19,17 +21,27 @@
       </header>
 
       <main role="main" class="inner cover">
-        <h1 class="cover-heading">YouNote</h1>
-        <p class="lead">YouNote is a web app allowing for a seamless integration between note-taking and watching YouTube videos.<br>
+       <div >
+       <a class="navbar-brand" href="/" style="color:#23a3ff; font-size:50px;">
+          <img src="../img/Icon.png" width="90" height="60"  class="d-inline-block align-top" style="text-size-adjust: 100px;" alt=""> YouNote
+        </a>
+        <br>
+        <p sec:authorize="!isAuthenticated()" class="lead">YouNote is a web app allowing for a seamless integration between note-taking and watching YouTube videos.<br>
         You can take, view, edit, and share notes online anytime for free.
         </p>
+        <p sec:authorize="isAuthenticated()" class="lead">Welcome Back!</p>
+        <br>
         <p class="lead">
-          <a href="/login" class="btn btn-lg btn-secondary">Login</a>
-          <a href="/signup" class="btn btn-lg btn-secondary">Sign up</a>
+      
+          <a href="/test" class="btn btn-lg btn-primary" sec:authorize="!isAuthenticated()">Try Younote</a>
+          <a href="/login" class="btn btn-lg btn-primary" sec:authorize="!isAuthenticated()">Log In</a>
+          <a href="/take_notes" class="btn btn-lg btn-primary"  sec:authorize="isAuthenticated()">Start Taking Notes</a>
+          <a href="/view_notes" class="btn btn-lg btn-primary"  sec:authorize="isAuthenticated()"> View Saved Notes </a>
+      
         </p>
+        </div>
       </main>
     </div>
-
     <footer th:replace="fragments/common :: foot"></footer> 
   </body>
 </html>

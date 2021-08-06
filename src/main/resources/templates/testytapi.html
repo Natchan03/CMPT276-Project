@@ -1,6 +1,6 @@
 <html>
   <head>
-      <title>Test Page</title>
+      <title>Test YouTube API</title>
       <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
       <script th:src="@{/scripts/test.js}" defer></script>
 
@@ -39,18 +39,18 @@
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
                   <input type="text" class="form-control"  placeholder="This page is for concept demonstration only, notes cannot be saved" style="margin-right:12px"></input>
                   <div class="input-group-append" >
-                    <button href="/take-notes" class="btn btn-primary" type="submit" sec:authorize="isAuthenticated()">Go to Take Notes page</button>
+                    <button href="/take_notes" class="btn btn-primary" type="submit" sec:authorize="isAuthenticated()">Go to Take Notes page</button>
                     <button href="/login" class="btn btn-primary" sec:authorize="!isAuthenticated()">Login to Save Notes</button>
                   </div>
                 </div>
                
                 </div>
-                
+          
               </div>
           </div>
         </form>
       </div>
-      <br><br><br><br><br>
+      <br><br><br><br>
     </main>
     <footer th:replace="fragments/common :: foot"></footer> 
       <!-- <footer class="footer bg-dark text-center text-white " style="background-color: rgb(33, 37, 41)">
