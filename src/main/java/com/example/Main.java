@@ -467,9 +467,9 @@ public class Main {
 
   @GetMapping(path = "/take_notes")
   public String getTakeNotes(Map<String, Object> model, HttpServletResponse response) {
-    response.setHeader("Set-Cookie", "key=value;");
-    response.setHeader("Set-Cookie", "SameSite=None;");
-    response.setHeader("Set-Cookie", "Secure");
+    response.addHeader("Set-Cookie", "key=value;");
+    response.addHeader("Set-Cookie", "SameSite=None;");
+    response.addHeader("Set-Cookie", "Secure");
     Note note = new Note();
     model.put("note", note);
     return "take_notes";
