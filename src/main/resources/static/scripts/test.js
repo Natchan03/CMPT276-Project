@@ -16,11 +16,14 @@ function linkRestyle(videourl){
 
     var processedURL="";
     var strpreced="https://www.youtube.com/embed/"
+    var strsucced="?enablejsapi=1"
     if((videourl.includes("youtube") || videourl.includes("youtu.be")) && videourl.includes("watch"))
     {
         videourl=videourl.substr(videourl.search("watch")+8,);
         videourl=videourl.slice( 0, 11);
         var url=processedURL.concat(strpreced,videourl);
+        var url = url.concat(strsucced);
+  
 
         return url;
     }
