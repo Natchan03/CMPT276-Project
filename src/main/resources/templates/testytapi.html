@@ -3,6 +3,11 @@
     <title>testing api controls</title>
     
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+    <script th:src="@{/scripts/test.js}" defer></script>
+
+
+    
+
   </head>
 <body>
     <nav th:replace="fragments/common :: navbar"></nav>
@@ -10,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6" style="position:relative; left: 9rem" >
-                    <iframe id="frameAPI"
+                    <iframe id="getvideo"
 
                             width="750" height="595"
                             
@@ -23,7 +28,7 @@
        
               
             </div>
-            <form type=text id="t_input" style="width:200px;" placeholder="Enter time as hour:minute:second"></form>
+            
         </div>
     </div>
     <div style="width:650px; position:relative; left: 190px;">
@@ -33,9 +38,9 @@
         
 
       </div>
-      <div>
+      <div></div>
         
-      </div>
+      
 
 
 
