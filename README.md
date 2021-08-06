@@ -81,5 +81,5 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 ### Mockup for Admin Dasboard Page
 ![alt text](mockup/Mockup-adminUser.png)
 
-### Mockup for Admin Access which is display when admin clicks id of a particular user
+### Mockup for Admin Access which is displayed when admin clicks id of a particular user
 ![alt text](mockup/Mockup-adminAccess.png)
