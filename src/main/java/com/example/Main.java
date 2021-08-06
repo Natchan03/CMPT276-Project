@@ -415,6 +415,12 @@ public class Main {
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
+    ResultSet rs2 = null;
+
+    if (user.getEmail().equals(curUser.getEmail())) {
+      model.put("message", "Cannot share notes with yourself");
+      return "error";
+    }
 
     try {
 
@@ -428,12 +434,20 @@ public class Main {
       }
 
       Long shared_with_id = rs.getLong("id");
+
+      rs2 = stmt.executeQuery("SELECT * FROM shares where shared_with_id = " + shared_with_id + " and noteId= " + id);
+      if (rs2.next()) {
+        model.put("message", "This note is already shared with this user");
+        return "error";
+      }
+
       stmt.executeUpdate("INSERT into shares (shared_with_id, noteId) values (" + shared_with_id + "," + id + ")");
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     } finally {
       Utils.DisposeDBHandles(connection, stmt, rs);
+      Utils.DisposeDBHandles(connection, stmt, rs2);
     }
     return ("redirect:/view_notes");
   }
