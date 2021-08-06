@@ -14,7 +14,8 @@ class NoteTest {
         n.setVideoId("video1");
         n.setTitle("Chapter 1");
         n.setOwnerId(1235556688);
-        
+        n.setisShared(true);
+        n.setisEditable(false);
     }
 
     @Test
@@ -38,4 +39,17 @@ class NoteTest {
         assertEquals(-255555555,n.getOwnerId());
     }
 
+    @Test
+    public void noteisShared(){
+         assertEquals(true,n.getIsShared());
+        n.setisShared(false);
+        assertEquals(false,n.getIsShared());
+    }
+
+    @Test
+    public void noteisEditable(){
+         assertEquals(false,n.getIsEditable());
+        n.setisEditable(true);
+        assertEquals(true,n.getIsEditable());
+    }
 }
