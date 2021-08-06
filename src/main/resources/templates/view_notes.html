@@ -18,17 +18,15 @@
                     <th scope="col">Title</th>
                     <th scope="col">Video ID</th>
                     <th scope="col">Date Created</th>
-                    <th scope="col">Content</th>
                     <th scope="col">is Shared</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each = "note,iter : ${noteList}">
-                    <td th:text="${note.id}"></td>
+                    <td><a th:href="@{'/view_content/' + ${note.id}}" th:text="${note.id}"></a></td>
                     <td th:text="${note.title}"></td>
                     <td th:text="${note.videoId}"></td>
                     <td th:text="${#temporals.format(note.dateCreated, 'MMM dd, yyyy')}"></td>
-                    <td th:utext="${note.content}"></td>
                     <td th:utext="${note.isShared}"></td>
                     <td>
                         <!--th:action should be modified for edit feature-->

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" th:object="${note}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${note.title}"></title>
+    <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+</head>
+<body class="text">
+    <nav th:replace="fragments/common :: navbar"></nav>
+
+    <div class="row">
+        <div class="col-xl">
+            <iframe
+                height=725
+                width=100%
+                id="getvideo"
+                src=""
+                frameborder="0"
+                style="border: solid 4px #23a3ff"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;">
+            </iframe>
+        </div>
+        <div class="col-xl card bg-dark">
+            <div class="card-body">    
+                <h2 class="card-title" th:text="${note.title}"></h2>
+                <p class="card-text" th:utext="${note.content}"></p>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="input_field" th:value="@{'https://www.youtube.com/embed/' + ${note.videoId}}"></input>
+
+    <footer th:replace="fragments/common :: foot"></footer>
+</body>
+    <script>
+        function resizeIFrameToFitContent(iFrame) {
+            iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
+            iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+        }
+        
+        videourl = document.getElementById("input_field").value;
+        document.getElementById("getvideo").src=videourl;
+        window.addEventListener('DOMContentLoaded', function(e) {
+            var iFrame = document.getElementById('getvideo');
+            resizeIFrameToFitContent(iFrame);
+        })
+    </script>
+</html>

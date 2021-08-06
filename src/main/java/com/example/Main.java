@@ -563,6 +563,34 @@ public class Main {
     return "view_notes";
   }
 
+  @GetMapping(path = "/view_content/{note_id}")
+  public String viewContents(Map<String, Object> model, @PathVariable String note_id) {
+    Note note = new Note();
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      rs = stmt.executeQuery("SELECT * FROM notes WHERE id = " + note_id);
+      if (rs.next()) {
+        note.setId(rs.getLong("id"));
+        note.setTitle(rs.getString("title"));
+        note.setVideoId(rs.getString("videoId"));
+        note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
+        note.setContent(rs.getString("content"));
+      }
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
+    }
+    model.put("note", note);
+    return "view_content";
+  }
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
