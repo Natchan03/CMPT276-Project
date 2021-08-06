@@ -2,25 +2,34 @@
 <html>
 
   <head>
-    <title>YouNote</title>
+    <title>YouNote Home</title>
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
   </head>
   
 
-  <body class="text">
+  <body class="text text-center">
   
     <nav th:replace="fragments/common :: navbar"></nav>
-    <main>
-      <h3> Main page under development </h3>
-      <br>
-    
-      <h5><a href="take_notes">Please login to visit our "Take Notes" feature page </a></h5>
-      <br>
-      <p> OR, </p>
-      <br>
-      <h5><a href="test"> Visit "Test" to try app's features as a guest </a></h5>
-      <br>
-    </main>
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column vertical-center">
+      
+      <header class="masthead mb-auto">
+        <div class="inner">
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">YouNote</h1>
+        <p class="lead">YouNote is a web app allowing for a seamless integration between note-taking and watching YouTube videos.<br>
+        You can take, view, edit, and share notes online anytime for free.
+        </p>
+        <p class="lead">
+          <a href="/login" class="btn btn-lg btn-secondary">Login</a>
+          <a href="/signup" class="btn btn-lg btn-secondary">Sign up</a>
+        </p>
+      </main>
+    </div>
+
     <footer th:replace="fragments/common :: foot"></footer> 
   </body>
 </html>
