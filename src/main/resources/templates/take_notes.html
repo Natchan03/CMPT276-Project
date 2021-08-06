@@ -5,7 +5,7 @@
     <script th:src="@{/scripts/test.js}" defer></script>
 
 </head>
-<body>
+<body th:object="${noteList}">
 <nav th:replace="fragments/common :: navbar"></nav>
 <br><br>
 <div class="container">
@@ -23,7 +23,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
                 >
                 </iframe>
-
+                <p th:each = "note:${noteList}">
                 <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
                     <input type="text" id="input_field" class="form-control" th:field="${note.videoId}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                     <div class="input-group-append" >
