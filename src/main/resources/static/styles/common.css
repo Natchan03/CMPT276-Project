@@ -109,3 +109,14 @@ div.signup {
     height: fit-content;
 }
 
+.btn-primary{
+    color: #fff;
+    background-color: #0495c9;
+    border-color: #357ebd; 
+}
+
+.btn-primary:hover{
+    color: #fff;
+    background-color: #494a4b;
+    border-color: #6c6d6e
+}

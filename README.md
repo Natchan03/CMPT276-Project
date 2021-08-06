@@ -74,3 +74,12 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 
 ### Mockup for Test Page
 ![alt text](mockup/Mockup-test.png)
+
+### Mockup for View Notes Page
+![alt text](mockup/Mockup-viewNotes.png)
+
+### Mockup for Admin Dasboard Page
+![alt text](mockup/Mockup-adminUser.png)
+
+### Mockup for Admin Access which is displayed when admin clicks id of a particular user
+![alt text](mockup/Mockup-adminAccess.png)
