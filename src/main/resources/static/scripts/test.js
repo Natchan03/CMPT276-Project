@@ -140,6 +140,9 @@ function getNotes() {
         return false;
     }
     else{
+        $('#setNoteId').val($("#noteId").val());
+        $('#setVideoId').val($("#input_field").val());
+        $('#setNoteTitle').val($("#note_title").val());
         $('#noteText').val($("#summernote").summernote("code"));
         return true;
     }

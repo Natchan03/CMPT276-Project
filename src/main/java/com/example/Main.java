@@ -31,6 +31,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -467,7 +469,9 @@ public class Main {
 
   @GetMapping(path = "/take_notes")
   public String getTakeNotes(Map<String, Object> model, HttpServletResponse response) {
-    response.addHeader("Set-Cookie", "SameSite=None; Secure");
+    response.setHeader("Set-Cookie", "key=value;");
+    response.setHeader("Set-Cookie", "SameSite=None;");
+    response.setHeader("Set-Cookie", "Secure");
     Note note = new Note();
     model.put("note", note);
     return "take_notes";
@@ -495,10 +499,18 @@ public class Main {
       User curUser = (User) principal;
       note.setOwnerId(curUser.getId());
 
-      String sql = "INSERT INTO notes(videoId, title, content, dateCreated, ownerId) VALUES ('" + note.getVideoId()
-          + "','" + note.getTitle() + "','" + note.getContent() + "','" + note.getDateCreated() + "','"
-          + note.getOwnerId() + "') ";
-      System.out.println("Inserting in notes table: " + sql);
+      // If note id is not null, update notes with id instead
+      Long note_id = note.getId();
+      String sql;
+      if (note_id != 0) {
+        sql = "UPDATE notes SET (videoId, title, content) = ('" + note.getVideoId() + "','" + note.getTitle() +
+        "','" + note.getContent() + "') WHERE id='" + note.getId() + "';";
+      } else {
+        sql = "INSERT INTO notes(videoId, title, content, dateCreated, ownerId) VALUES ('" + note.getVideoId()
+              + "','" + note.getTitle() + "','" + note.getContent() + "','" + note.getDateCreated() + "','"
+              + note.getOwnerId() + "') ";
+      }
+      System.out.println(sql);
       // System.out.println(rawContent);
       stmt.executeUpdate(sql);
       return "redirect:/take_notes";
@@ -595,40 +607,36 @@ public class Main {
     return "view_content";
   }
 
-  @PostMapping(path = "/edit_own_note/{id}")
-  public String editOwnNotes(Map<String, Object> model, @PathVariable String id) {
-    
-    // Gets user currently logged in
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User curUser = (User) principal;
+  @RequestMapping(
+    path = "/edit_own_note/{note_id}",
+    method = RequestMethod.POST
+  )
+  public RedirectView editOwnNotes(Map<String, Object> model, @PathVariable String note_id, RedirectAttributes redir) {
 
-    ArrayList<Note> noteList = new ArrayList<Note>();
+    Note note = new Note();
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
-
-    //getting notes that user had saved
-    try {
+    
+    // Get notes saved by user
+    try {      
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
-      rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + curUser.getId());
-      while(rs.next()){
-        Note note = new Note();
+      rs = stmt.executeQuery("SELECT * FROM notes WHERE id = " + note_id);
+      if (rs.next()) {
         note.setId(rs.getLong("id"));
         note.setTitle(rs.getString("title"));
         note.setVideoId(rs.getString("videoId"));
-        note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
         note.setContent(rs.getString("content"));
-        noteList.add(note);
-    }
+      }
     } catch (Exception e) {
       model.put("message", e.getMessage());
-      return "error";
+      return new RedirectView("error", true);
     } finally {
       Utils.DisposeDBHandles(connection, stmt, rs);
     }
-    model.put("noteList", noteList);
-    return "take_notes";
+    redir.addFlashAttribute("oldNote", note);
+    return new RedirectView("/take_notes", true);
   }
   
   @Bean

@@ -8,28 +8,41 @@
 <body th:object="${noteList}">
 <nav th:replace="fragments/common :: navbar"></nav>
 <br><br>
-<div class="container">
+<div class="container" th:object="${oldNote}">
     <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
+        <input type="number" id="noteId" th:if="${oldNote}" th:value="${oldNote?.id}" hidden />
+        <input type="number" id="noteId" th:unless="${oldNote}" th:value="0" hidden />
+        <input type="number" id="setNoteId" th:field="${note.id}" hidden />
+         th:field="${note.id}" hidden />
         <div class="row" style="max-width: min-content;">
             <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
+                <iframe
+                        width="725"
+                        height="595"
+                        id="getvideo"
 
 
-                <div id="player" ></div>
-
-
+                        frameborder="0"
+                        style="border: solid 4px #23a3ff"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
+                >
+                </iframe>
                 <p th:each = "note:${noteList}">
                 <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
-                    <input type="text" id="input_field" class="form-control" th:field="${note.videoId}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
+                    <input type="text" id="input_field" class="form-control" th:if="${oldNote}" th:value="@{'https://www.youtube.com/watch?v=' + ${oldNote?.videoId}}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px" />
+                    <input type="text" id="input_field" class="form-control" th:unless="${oldNote}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px" />
+                    <input type="text" id="setVideoId" th:field=${note.videoId} hidden />
                     <div class="input-group-append" >
-                        <button onclick="return loadVideo2()" class="btn btn-primary" type="button">Load Video</button>
+                        <button onclick="return loadVideo()" class="btn btn-primary" type="button">Load Video</button>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
-                <div id="summernote"></div>
+                <div id="summernote" th:utext="${oldNote?.content}"></div>
                 <input id="noteText" th:field="${note.content}" hidden />
                 <div class="input-group sm-3" style="width: 725px; position:relative; top:25px;">
-                    <input type="text" class="form-control" id = "note_title"  th:field="${note.title}" placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
+                    <input type="text" class="form-control" id="note_title" th:value="${oldNote?.title}" placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
+                    <input type="text" id="setNoteTitle" th:field="${note.title}" hidden />
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit" onclick="return getNotes()">Save Notes</button>
                     </div>
@@ -51,8 +64,6 @@
     <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
     - All Rights Reserved
   </div -->
-
 </footer>
-
 </body>
 </html>
