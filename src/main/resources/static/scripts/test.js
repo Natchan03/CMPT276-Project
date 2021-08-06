@@ -26,6 +26,12 @@ function linkRestyle(videourl){
   
 
         return url;
+    } else if(videourl.includes("youtu.be") && !videourl.includes("watch")){
+        videourl=videourl.substr(videourl.search("youtu.be/")+9,);
+        videourl=videourl.slice( 0, 11);
+        var url=processedURL.concat(strpreced,videourl);
+        var url = url.concat(strsucced);
+        return url;
     }
     else{alert("The URL provided is invalid, please try again with a valid Youtube video URL")}
 
