@@ -10,6 +10,63 @@ function loadVideo() {
         return true;
     }
 };
+ // 2. This code loads the IFrame Player API code asynchronously.
+ var tag = document.createElement('script');
+
+ tag.src = "https://www.youtube.com/iframe_api";
+ var firstScriptTag = document.getElementsByTagName('script')[0];
+ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+ 
+ // 3. This function creates an <iframe> (and YouTube player)
+ //    after the API code downloads.
+ var player;
+ function onYouTubeIframeAPIReady() {
+ 
+ }
+       function loadVideo2() {
+           var videourl = document.getElementById("input_field").value;
+           if(videourl === ""){
+            alert("There is no URL provided, please enter your link and try again");
+            return false;
+            }
+            else{
+           var videoid = getvideoID(videourl);
+           if (player == undefined) {
+               player = new YT.Player('player', {
+                   height: '595',
+                   width: '725',
+                   videoId: videoid,
+                   playerVars: {
+                   'playsinline': 1
+                   },
+                   events: {
+                   'onReady': onPlayerReady,
+                   'onStateChange': onPlayerStateChange
+                   }
+               });
+           } else {
+               player.loadVideoById(videoid, 0, "large");
+           }}
+     };
+ 
+ // 4. The API will call this function when the video player is ready.
+ function onPlayerReady(event) {
+ event.target.playVideo();
+ }
+ 
+ // 5. The API calls this function when the player's state changes.
+ //    The function indicates that when playing a video (state=1),
+ //    the player should play for six seconds and then stop.
+ var done = false;
+ function onPlayerStateChange(event) {
+ if (event.data == YT.PlayerState.PLAYING && !done) {
+  
+   done = true;
+ }
+ }
+ function stopVideo() {
+ player.stopVideo();
+ }
 
 
 function linkRestyle(videourl){
@@ -55,7 +112,7 @@ $(document).ready(function() {
         ['para', ['ul', 'ol', 'paragraph']],
         ['table', ['table']],
         ['insert', ['link', 'picture']],
-        ['view', [ 'help']],
+        ['view', [ 'help','codeview']],
       ],
   
         width: 725,
@@ -101,25 +158,12 @@ function timeStamp(){
     $('#summernote').summernote('pasteHTML', HTMLString);
 };
 */
-
-//tester function to be replaced with get_time function
-//that uses iframes api to return exact video playtime 
-// for now evry word is 10 seconds apart
-var time_in_seconds=0;
-function get_timestamp(){
-  time_in_seconds=time_in_seconds+10;
-  return time_in_seconds;
-}//returns time in t 
-
   
 //function to load video at time t, after clicking on a timestamp . (time t should be in seconds )
-  function Timestamp_embed(t){
+  function Timestamp_embed(time_in_seconds){
     var videourl = document.getElementById("input_field").value;
-    var url = linkRestyle(videourl);
-    var play = "&autoplay=1"
-    var strsucced="&start=".concat(t,play);
-    url = url.concat(strsucced);
-    document.getElementById("getvideo").src=url;
+    var videoid = getvideoID(videourl);
+    player.loadVideoById(videoid, time_in_seconds,"large");
     }
     
     //var links= linkToTimedlink("https://www.youtube.com/watch?v=8EHEvx4eGlQ","120s")
@@ -127,10 +171,10 @@ function get_timestamp(){
 
 // converts html to add timestamps into a string, to be injected into summernotes text editor
 function inject_ts_html(){
-  var t = get_timestamp();
+  var time_in_seconds=player.getCurrentTime();
   var strpreced ='<button id="embed_ts" type="button" class="btn btn-light" onclick="Timestamp_embed(';
-  var strsucced =')"></button>';
-  var html_ts = strpreced.concat(t,strsucced);
+  var strsucced =')">.</button>';
+  var html_ts = strpreced.concat(time_in_seconds,strsucced);
   return html_ts;
 }
 
@@ -143,5 +187,6 @@ var total_func_calls=0
         $('#summernote').summernote('pasteHTML', HTMLstring);
         total_func_calls++;
       }
-  })
+  });
+
 

@@ -16,22 +16,13 @@
         <form action="#" method="post"  th:object="${note}">  
           <div class="row" style="max-width: min-content;">
               <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
-                <iframe  
-                width="725" 
-                height="595" 
-                id="getvideo" 
-                title="YouTube video player" 
-                
-                frameborder="0" 
-                style="border: solid 4px #23a3ff"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" 
-                >
-              </iframe>
+            
+                <div id="player" ></div>
               
                 <div class="input-group sm-3" style="width:725; position: relative; top:25px;">
                   <input type="text" id="input_field" class="form-control"  placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                   <div class="input-group-append" >
-                    <button onclick="loadVideo()" class="btn btn-primary"  type="button">Load Video</button>
+                    <button onclick="loadVideo2()" class="btn btn-primary"  type="button">Load Video</button>
                   </div>
                 </div>
               </div>

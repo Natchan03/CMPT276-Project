@@ -12,22 +12,16 @@
     <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
         <div class="row" style="max-width: min-content;">
             <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
-                <iframe
-                        width="725"
-                        height="595"
-                        id="getvideo"
 
 
-                        frameborder="0"
-                        style="border: solid 4px #23a3ff"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
-                >
-                </iframe>
+                <div id="player" ></div>
+
+
                 <p th:each = "note:${noteList}">
                 <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
                     <input type="text" id="input_field" class="form-control" th:field="${note.videoId}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                     <div class="input-group-append" >
-                        <button onclick="return loadVideo()" class="btn btn-primary" type="button">Load Video</button>
+                        <button onclick="return loadVideo2()" class="btn btn-primary" type="button">Load Video</button>
                     </div>
                 </div>
             </div>
@@ -57,6 +51,8 @@
     <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
     - All Rights Reserved
   </div -->
+
 </footer>
+
 </body>
 </html>
