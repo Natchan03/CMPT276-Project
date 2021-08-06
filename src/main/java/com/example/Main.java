@@ -96,10 +96,15 @@ public class Main {
       stmt.executeUpdate(sql3);
 
       // Create shares table if not exists.
-      String sql4 = "CREATE TABLE IF NOT EXISTS shares " + "(id serial, shared_with_id bigint, noteId bigint,"
+      String sql4 = "CREATE TABLE IF NOT EXISTS shares " + "(id serial, shared_with_id bigint, noteId bigint, "
           + "PRIMARY KEY(id),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
       System.out.println(sql4);
       stmt.executeUpdate(sql4);
+
+      // Create shares table if not exists.
+      String sql5 = "ALTER TABLE shares ADD COLUMN is_editable boolean";
+      System.out.println(sql5);
+      stmt.executeUpdate(sql5);
 
       // Check whether the table has admin
       rs = stmt.executeQuery("SELECT * FROM users where email='admin@younote.com'");
@@ -406,8 +411,11 @@ public class Main {
   }
 
   @PostMapping(path = "/share_note/{id}")
-  public String shareNote(Map<String, Object> model, @PathVariable String id, User user) {
-    System.out.println("share note" + id + " " + user.getEmail());
+  public String shareNote(Map<String, Object> model, @PathVariable String id, User user,
+      @RequestParam(value = "isEditable", required = false) Boolean isEditable) {
+
+    System.out.println("share note" + id + " " + user.getEmail() + " " + isEditable);
+
     // Gets user currently logged in
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User curUser = (User) principal;
@@ -441,7 +449,8 @@ public class Main {
         return "error";
       }
 
-      stmt.executeUpdate("INSERT into shares (shared_with_id, noteId) values (" + shared_with_id + "," + id + ")");
+      stmt.executeUpdate("INSERT into shares (shared_with_id, noteId, is_editable) values (" + shared_with_id + "," + id
+          + "," + isEditable + ")");
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
@@ -521,12 +530,14 @@ public class Main {
         note.setDateCreated(rs.getDate("dateCreated").toLocalDate());
         note.setContent(rs.getString("content"));
         note.setisShared(false);
+        note.setisEditable(true);
         // Shared ids tbd
         noteList.add(note);
       }
       // get notes shared with logged in user
       rs2 = stmt.executeQuery(
-          "SELECT n.* FROM shares s JOIN notes n ON s.noteId=n.id WHERE s.shared_with_id = " + curUser.getId());
+          "SELECT n.*, s.is_editable FROM shares s JOIN notes n ON s.noteId=n.id WHERE s.shared_with_id = "
+              + curUser.getId());
       while (rs2.next()) {
         Note note = new Note();
         note.setId(rs2.getLong("id"));
@@ -535,6 +546,7 @@ public class Main {
         note.setDateCreated(rs2.getDate("dateCreated").toLocalDate());
         note.setContent(rs2.getString("content"));
         note.setisShared(true);
+        note.setisEditable(rs2.getBoolean("is_editable"));
         // Shared ids tbd
         noteList.add(note);
       }

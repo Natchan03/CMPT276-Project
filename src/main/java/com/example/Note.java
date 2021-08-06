@@ -1,9 +1,6 @@
 package com.example;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Date;
-import java.time.Duration;
 
 // public class Note implements NoteDetails {
 public class Note {
@@ -15,6 +12,7 @@ public class Note {
     private long ownerId;
     private long[] sharedIds;
     private boolean isShared;
+    private boolean isEditable;
 
     // Getters
     public long getId() {
@@ -49,6 +47,10 @@ public class Note {
         return this.isShared;
     }
 
+    public boolean getIsEditable() {
+        return this.isEditable;
+    }
+
     // Setters
     public void setId(long newId) {
         this.id = newId;
@@ -80,6 +82,10 @@ public class Note {
 
     public void setisShared(boolean newIsShared) {
         this.isShared = newIsShared;
+    }
+
+    public void setisEditable(boolean newIsEditable) {
+        this.isEditable = newIsEditable;
     }
 
     // Iteration 3 TO-DO: Methods to insert (share) or remove (unshare) a single or

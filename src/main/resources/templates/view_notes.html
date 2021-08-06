@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each = "note : ${noteList}">
+                <tr th:each = "note,iter : ${noteList}">
                     <td th:text="${note.id}"></td>
                     <td th:text="${note.title}"></td>
                     <td th:text="${note.videoId}"></td>
@@ -31,15 +31,17 @@
                     <td th:utext="${note.content}"></td>
                     <td th:utext="${note.isShared}"></td>
                     <td>
-                        <form action="#" method="post" th:action="@{'/delete_own_note/' + ${note.id}}" th:if="${note.isShared == false}" style="margin:5px">
-                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        <!--th:action should be modified for edit feature-->
+                        <form action="#" method="post" th:action= "@{'/'}" th:if="${note.isEditable == true}" style="margin:5px">
+                            <button type="submit" class="btn btn-outline-light">Edit</button>
                         </form>
+                       
                         <form action="#" method="post" th:action="@{'/share_note/' + ${note.id}}" th:object="${user}" th:if="${note.isShared == false}" style="margin:5px">
-                            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button type="button" class="btn btn-outline-light" data-toggle="modal" th:data-target="'#exampleModalCenter' + ${iter.index}">
                                 Share
                             </button>
 
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" th:id="'exampleModalCenter' + ${iter.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -52,7 +54,13 @@
                                         <div class="form-group text-dark">
                                             <label for="exampleFormControlInput1 ">Email address</label>
                                             <input type="email" class="form-control" th:field=*{email} id="exampleFormControlInput1" placeholder="name@example.com">
-                                          </div>
+                                        </div>
+
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" th:name="isEditable" id="exampleCheck1">
+                                            <label class="form-check-label text-dark " for="exampleCheck1" >Allow user to edit the notes?</label>
+                                        </div>
+
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -61,6 +69,9 @@
                                   </div>
                                 </div>
                               </div>
+                        </form>
+                        <form action="#" method="post" th:action="@{'/delete_own_note/' + ${note.id}}" th:if="${note.isShared == false}" style="margin:5px">
+                            <button type="submit" class="btn btn-outline-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
