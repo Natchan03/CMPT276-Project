@@ -11,11 +11,9 @@
   
     <nav th:replace="fragments/common :: navbar"></nav>
 
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column vertical-center">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       
-      <header class="masthead mb-auto">
-        <div class="inner">
-        </div>
+      <header class="masthead mb-auto" style="height:200px;max-height:20vh;">
       </header>
 
       <main role="main" class="inner cover">
@@ -24,8 +22,8 @@
         You can take, view, edit, and share notes online anytime for free.
         </p>
         <p class="lead">
-          <a href="/login" class="btn btn-lg btn-secondary">Login</a>
-          <a href="/signup" class="btn btn-lg btn-secondary">Sign up</a>
+          <a href="/login" class="btn btn-lg btn-secondary" sec:authorize="!isAuthenticated()">Login</a>
+          <a href="/signup" class="btn btn-lg btn-secondary" sec:authorize="!isAuthenticated()">Sign up</a>
         </p>
       </main>
     </div>
