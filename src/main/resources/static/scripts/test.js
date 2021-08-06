@@ -128,7 +128,7 @@ function get_timestamp(){
 // converts html to add timestamps into a string, to be injected into summernotes text editor
 function inject_ts_html(){
   var t = get_timestamp();
-  var strpreced ='<button id="embed_ts" class="btn btn-light" onclick="Timestamp_embed(';
+  var strpreced ='<button id="embed_ts" type="button" class="btn btn-light" onclick="Timestamp_embed(';
   var strsucced =')"></button>';
   var html_ts = strpreced.concat(t,strsucced);
   return html_ts;
