@@ -70,20 +70,22 @@ public class Main {
     Statement stmt = null;
     ResultSet rs = null;
 
+
+
     try {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
 
       // Create users table if not exists
       String sql1 = "CREATE TABLE IF NOT EXISTS users "
-          + "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
+              + "(id serial,fname varchar(40),lname varchar(40), email varchar(40), password varchar(256), type varchar(20))";
       System.out.println(sql1);
       stmt.executeUpdate(sql1);
 
       // Create notes table if not exists
       String sql2 = "CREATE TABLE IF NOT EXISTS notes "
-          + "(id serial,videoId varchar(11),title varchar(40),content varchar(2000),dateCreated date,ownerId bigint,sharedIds bigint[],"
-          + "PRIMARY KEY(id))";
+              + "(id serial,videoId varchar(11),title varchar(40),content varchar(2000),dateCreated date,ownerId bigint,sharedIds bigint[],"
+              + "PRIMARY KEY(id))";
       System.out.println(sql2);
       stmt.executeUpdate(sql2);
 
@@ -91,13 +93,13 @@ public class Main {
       // Note the primary key is a combination of seconds and the foreign key to the
       // id in the notes table
       String sql3 = "CREATE TABLE IF NOT EXISTS timestamps " + "(noteId bigint,seconds bigint,content varchar(300),"
-          + "PRIMARY KEY(noteId,seconds),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
+              + "PRIMARY KEY(noteId,seconds),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
       System.out.println(sql3);
       stmt.executeUpdate(sql3);
 
       // Create shares table if not exists.
       String sql4 = "CREATE TABLE IF NOT EXISTS shares " + "(id serial, shared_with_id bigint, noteId bigint, "
-          + "PRIMARY KEY(id),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
+              + "PRIMARY KEY(id),CONSTRAINT fk_notes FOREIGN KEY(noteId) REFERENCES notes(id))";
       System.out.println(sql4);
       stmt.executeUpdate(sql4);
 
@@ -118,7 +120,7 @@ public class Main {
 
       // Insert admin to the table
       String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('admin','admin','admin@younote.com','"
-          + hashed + "', 'admin')";
+              + hashed + "', 'admin')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
@@ -235,7 +237,7 @@ public class Main {
 
       // Insert the new user to the table
       String sql = "INSERT INTO users(fname, lname, email, password, type) VALUES ('" + user.getFname() + "','"
-          + user.getLname() + "','" + user.getEmail() + "','" + hashed + "', 'regular')";
+              + user.getLname() + "','" + user.getEmail() + "','" + hashed + "', 'regular')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
@@ -251,7 +253,6 @@ public class Main {
 
   @GetMapping(path = "/login")
   public String getLoginPage(@RequestParam("error") Optional<String> error, Map<String, Object> model) {
-
     if (error.isPresent()) {
 
       model.put("errorMessage", "Invalid e-mail or password.");
@@ -412,7 +413,7 @@ public class Main {
 
   @PostMapping(path = "/share_note/{id}")
   public String shareNote(Map<String, Object> model, @PathVariable String id, User user,
-      @RequestParam(value = "isEditable", required = false) Boolean isEditable) {
+                          @RequestParam(value = "isEditable", required = false) Boolean isEditable) {
 
     System.out.println("share note" + id + " " + user.getEmail() + " " + isEditable);
 
@@ -450,7 +451,7 @@ public class Main {
       }
 
       stmt.executeUpdate("INSERT into shares (shared_with_id, noteId, is_editable) values (" + shared_with_id + "," + id
-          + "," + isEditable + ")");
+              + "," + isEditable + ")");
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
@@ -462,7 +463,8 @@ public class Main {
   }
 
   @GetMapping(path = "/take_notes")
-  public String getTakeNotes(Map<String, Object> model) {
+  public String getTakeNotes(Map<String, Object> model, HttpServletResponse response) {
+    response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=None; Secure");
     Note note = new Note();
     model.put("note", note);
     return "take_notes";
@@ -474,7 +476,6 @@ public class Main {
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
-
     try {
       connection = dataSource.getConnection();
       stmt = connection.createStatement();
@@ -492,8 +493,8 @@ public class Main {
       note.setOwnerId(curUser.getId());
 
       String sql = "INSERT INTO notes(videoId, title, content, dateCreated, ownerId) VALUES ('" + note.getVideoId()
-          + "','" + note.getTitle() + "','" + note.getContent() + "','" + note.getDateCreated() + "','"
-          + note.getOwnerId() + "') ";
+              + "','" + note.getTitle() + "','" + note.getContent() + "','" + note.getDateCreated() + "','"
+              + note.getOwnerId() + "') ";
       System.out.println("Inserting in notes table: " + sql);
       // System.out.println(rawContent);
       stmt.executeUpdate(sql);
@@ -536,8 +537,8 @@ public class Main {
       }
       // get notes shared with logged in user
       rs2 = stmt.executeQuery(
-          "SELECT n.*, s.is_editable FROM shares s JOIN notes n ON s.noteId=n.id WHERE s.shared_with_id = "
-              + curUser.getId());
+              "SELECT n.*, s.is_editable FROM shares s JOIN notes n ON s.noteId=n.id WHERE s.shared_with_id = "
+                      + curUser.getId());
       while (rs2.next()) {
         Note note = new Note();
         note.setId(rs2.getLong("id"));

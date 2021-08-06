@@ -1,64 +1,89 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Take Notes</title>
+    <meta charset="UTF-8">
+    <title>View Notes</title>
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+<<<<<<< Updated upstream
     <script th:src="@{/scripts/test.js}" defer></script>
 
     
+=======
+    <script th:src="@{/scripts/search.js}" defer></script>
+>>>>>>> Stashed changes
 </head>
-<body>
+<body class = "text" th:object="${noteList}">
 <nav th:replace="fragments/common :: navbar"></nav>
-<div class="container">
-    <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
-        <div class="row" style="max-width: min-content;">
-            <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
-                <iframe
-                        width="725"
-                        height="595"
-                        id="getvideo"
-                        src=""
 
+<main>
+    <div class="container">
+        <h1>View Saved Notes</h1>
+        <table class="table table-dark" id="notes_table">
+            <thead>
+            <tr>
+                <th scope="col">Note ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Video ID</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">is Shared</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "note,iter : ${noteList}">
+                <td><a th:href="@{'/view_content/' + ${note.id}}" th:text="${note.id}"></a></td>
+                <td th:text="${note.title}"></td>
+                <td th:text="${note.videoId}"></td>
+                <td th:text="${#temporals.format(note.dateCreated, 'MMM dd, yyyy')}"></td>
+                <td th:utext="${note.isShared}"></td>
+                <td>
+                    <!--th:action should be modified for edit feature-->
+                    <form action="#" method="post" th:action= "@{'/'}" th:if="${note.isEditable == true}" style="margin:5px">
+                        <button type="submit" class="btn btn-outline-light">Edit</button>
+                    </form>
 
-                        frameborder="0"
-                        style="border: solid 4px #23a3ff"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
-                >
-                </iframe>
+                    <form action="#" method="post" th:action="@{'/share_note/' + ${note.id}}" th:object="${user}" th:if="${note.isShared == false}" style="margin:5px">
+                        <button type="button" class="btn btn-outline-light" data-toggle="modal" th:data-target="'#exampleModalCenter' + ${iter.index}">
+                            Share
+                        </button>
 
-                <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
-                    <input type="text" id="input_field" class="form-control" th:field="${note.videoId}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
-                    <div class="input-group-append" >
-                        <button onclick="return loadVideo()" class="btn btn-primary" type="button">Load Video</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
-                <div id="summernote"></div>
-                <input id="noteText" th:field="${note.content}" hidden />
-                <div class="input-group sm-3" style="width: 725px; position:relative; top:25px;">
-                    <input type="text" class="form-control" id = "note_title"  th:field="${note.title}" placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit" onclick="return getNotes()">Save Notes</button>
-                    </div>
-                </div>
+                        <div class="modal fade" th:id="'exampleModalCenter' + ${iter.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-dark" id="exampleModalLongTitle">Share with </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group text-dark">
+                                            <label for="exampleFormControlInput1 ">Email address</label>
+                                            <input type="email" class="form-control" th:field=*{email} id="exampleFormControlInput1" placeholder="name@example.com">
+                                        </div>
 
-            </div>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" th:name="isEditable" id="exampleCheck1">
+                                            <label class="form-check-label text-dark " for="exampleCheck1" >Allow user to edit the notes?</label>
+                                        </div>
 
-        </div>
-</div>
-</form>
-</div>
-<br><br><br><br><br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="#" method="post" th:action="@{'/delete_own_note/' + ${note.id}}" th:if="${note.isShared == false}" style="margin:5px">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
-<br>
 <footer th:replace="fragments/common :: foot"></footer>
-<!-- <footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
-<footer class="footer bg-dark text-center text-white" style="background-color: rgb(33, 37, 41)">
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2021 Copyright:
-    <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
-    - All Rights Reserved
-  </div -->
-</footer>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>View Notes</title>
     <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
+    <script th:src="@{/scripts/search.js}" defer></script>
 </head>
 <body class = "text" th:object="${noteList}">
     <nav th:replace="fragments/common :: navbar"></nav>
@@ -11,7 +12,7 @@
     <main>
         <div class="container">
             <h1>View Saved Notes</h1>
-            <table class="table table-dark">
+            <table class="table table-dark" id="notes_table">
                 <thead>
                 <tr>
                     <th scope="col">Note ID</th>
@@ -75,6 +76,7 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
     </main>
     <footer th:replace="fragments/common :: foot"></footer>
 </body>
