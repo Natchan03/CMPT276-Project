@@ -22,12 +22,12 @@
                         style="border: solid 4px #23a3ff"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
                 >
-                </iframe>
+                </iframe><div id="player"></div>
                 <p th:each = "note:${noteList}">
                 <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
                     <input type="text" id="input_field" class="form-control" th:field="${note.videoId}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px"></input>
                     <div class="input-group-append" >
-                        <button onclick="return loadVideo()" class="btn btn-primary" type="button">Load Video</button>
+                        <button onclick="return loadVideo2()" class="btn btn-primary" type="button">Load Video</button>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,60 @@
     © 2021 Copyright:
     <a class="text-white" style="text-align:center;" href="https://cmpt276-project-2.herokuapp.com/">https://cmpt276-project-2.herokuapp.com/</a>
     - All Rights Reserved
-  </div -->
+  </div --><script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubeIframeAPIReady() {
+  
+}
+        function loadVideo2() {
+            var videourl = document.getElementById("input_field").value;
+            console.log(videourl);
+            if (player == undefined) {
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: videourl,
+                    playerVars: {
+                    'playsinline': 1
+                    },
+                    events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                    }
+                });
+            } else {
+                player.loadVideoById(videourl, 5, "large");
+            }
+      };
+
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+  event.target.playVideo();
+}
+
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+var done = false;
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING && !done) {
+    setTimeout(stopVideo, 6000);
+    done = true;
+  }
+}
+function stopVideo() {
+  player.stopVideo();
+}
+</script>
 </footer>
 </body>
 </html>
