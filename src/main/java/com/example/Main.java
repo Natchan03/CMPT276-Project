@@ -579,7 +579,7 @@ public class Main {
     return "view_notes";
   }
 
-  @GetMapping(path = "/view_content/{note_id}")
+  @PostMapping(path = "/view_content/{note_id}")
   public String viewContents(Map<String, Object> model, @PathVariable String note_id) {
     Note note = new Note();
     Connection connection = null;
