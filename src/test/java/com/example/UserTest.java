@@ -52,5 +52,30 @@ class UserTest {
         u.setType("admin");
         assertEquals("admin",u.getType());
     }
+    
+    //test cases for functions for implementing user Details
+    @Test
+    public void userName(){
+        assertEquals("jacksmith@gmail.com", u.getUsername());
+    }
 
+    @Test
+    public void accountExpired(){
+        assertEquals(true, u.isAccountNonExpired());
+    }
+
+    @Test
+    public void accountNotLocked(){
+        assertEquals(true, u.isAccountNonLocked());
+    }
+
+    @Test
+    public void accountCredentialsNotExpired(){
+        assertEquals(true, u.isCredentialsNonExpired());
+    }
+
+    @Test
+    public void accountisEnabled(){
+        assertEquals(true, u.isEnabled());
+    }
 }

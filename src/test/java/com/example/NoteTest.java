@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NoteTest {
     static Note n;
-
     @BeforeAll
     static void setUp(){
         n = new Note();
         n.setVideoId("video1");
         n.setTitle("Chapter 1");
+        n.setContent("Hi, This is a test");
         n.setOwnerId(1235556688);
         n.setisShared(true);
         n.setisEditable(false);
@@ -33,6 +33,13 @@ class NoteTest {
     }
 
     @Test
+    public void setContent(){
+        assertEquals("Hi, This is a test", n.getContent());
+        n.setContent("Topic 1: This is an important thing & could be asked in exams");
+        assertEquals("Topic 1: This is an important thing & could be asked in exams",n.getContent());
+    }
+
+    @Test
     public void noteOwnerId(){
         assertEquals(1235556688,n.getOwnerId());
         n.setOwnerId(-255555555);
@@ -41,14 +48,14 @@ class NoteTest {
 
     @Test
     public void noteisShared(){
-         assertEquals(true,n.getIsShared());
+        assertEquals(true,n.getIsShared());
         n.setisShared(false);
         assertEquals(false,n.getIsShared());
     }
 
     @Test
     public void noteisEditable(){
-         assertEquals(false,n.getIsEditable());
+        assertEquals(false,n.getIsEditable());
         n.setisEditable(true);
         assertEquals(true,n.getIsEditable());
     }
