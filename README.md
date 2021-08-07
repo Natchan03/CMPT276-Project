@@ -52,16 +52,32 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 ## User Stories for Iteration 3
 
 ### Iteration 3
+
 * Notes will be associated with a timestamp in the video.
-* Admin users will have an option to modify or delete notes from standard accounts.
-* Users will be able to search for a video in the application.
-* Users can click on a “Forgot Password?” link to reset their passwords.
-* Users will be able to edit and share their notes.
+
+### Iteration 2: Users can view their notes
+* After logging in, Alex (User) can view his saved notes by clicking on “View Notes” on the navigation bar. Clicking on “View” on the row for a note will take him to a view notes page where Alex(user) can view the notes he took and also if he wants he can play the video along with it for which the notes have been taken.
+
+### Iteration 3: Users can edit their own notes
+* After logging in, Alex (User) can edit his saved notes by clicking on “View Notes” on the navigation bar. This will display notes information and have edit button. Clicking on “Edit” on the row for a note will take him back to the Take Notes page which will contain his previously taken notes info. Alex can edit them as he wishes and then save his changes as well.
+
+### Iteration 3: Users can share their notes
+* After logging in, Alex (User) can share his saved notes by clicking on “View Notes” on the navigation bar. This will display notes information and have share button. Clicking on “Share” on the row will ask him to enter the email id of the user with whom he would like to share the notes. If the user is found, the notes will be shared and if user is not found, it will display an error message. Also, Alex(user) cannot share the notes with himself and if he tries to do so, he will get an error message saying 'Cannot Share Notes with yourself'.
+   * Notes could only be shared with users who have signed up for YouNote.
+  
+
 * Users will be able to unshare their videos and notes.
+
 * Users, particularly instructors, will be able to share videos to multiple users at once.
+
 * In the User's account, there will be a “Watched Videos” page which will show the history of videos for which the user has saved notes for.
+
 * In the User's account, there will be a “Shared With Me” page which will show videos and notes that other users have shared.
+
 * Users will be able to add videos and notes to their favorites.
+
+### Iteration 2: Included test cases for classes
+* Added more test cases for the User, Note, and Timestamp classes using the JUnit framework.
 
 
 ## User Interface Requirements
