@@ -59,18 +59,11 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 
 ### Iteration 3: Users can share their notes
 * After logging in, Alex (User) can share his saved notes by clicking on “View Notes” on the navigation bar. This will display notes information and have share button. Clicking on “Share” on the row will ask him to enter the email id of the user with whom he would like to share the notes. If the user is found, the notes will be shared and if user is not found, it will display an error message. Also, Alex(user) cannot share the notes with himself and if he tries to do so, he will get an error message saying 'Cannot Share Notes with yourself'.
+   * When sharing notes Alex (user) will also have an option to make that notes editable or not by other user with whom he is sharing the notes.
    * Notes could only be shared with users who have signed up for YouNote.
   
-
-* Users will be able to unshare their videos and notes.
-
-* Users, particularly instructors, will be able to share videos to multiple users at once.
-
-* In the User's account, there will be a “Watched Videos” page which will show the history of videos for which the user has saved notes for.
-
-* In the User's account, there will be a “Shared With Me” page which will show videos and notes that other users have shared.
-
-* Users will be able to add videos and notes to their favorites.
+### Iteration 3: Users will be able to unshare their notes.
+* After logging in, Alex (User) can unshare the notes shared by other users by clicking on “View Notes” on the navigation bar. This will display notes information and have unshare button. Clicking on “unShare From me” will unshare the notes which was shared by other user.
 
 ### Iteration 3: Included test cases for classes
 * Added more test cases for the User, Note, and Timestamp classes using the JUnit framework.
