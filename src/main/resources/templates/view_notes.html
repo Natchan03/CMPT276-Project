@@ -77,6 +77,9 @@
                                 <form class="col" action="#" method="post" th:action="@{'/delete_own_note/' + ${note.id}}" th:if="${note.isShared == false}" style="margin:3px">
                                     <button type="submit" class="btn btn-outline-danger btn-block">Delete</button>
                                 </form>
+                                <form class="col" action="#" method="post" th:action="@{'/unshare_from_me/' + ${note.id}}" th:unless="${note.isShared == false}" style="margin:3px">
+                                    <button type="submit" class="btn btn-outline-danger btn-block">Unshare From Me</button>
+                                </form>
                             </div>
                         </div>
                     </td>

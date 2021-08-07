@@ -467,6 +467,30 @@ public class Main {
     return ("redirect:/view_notes");
   }
 
+  @PostMapping("/unshare_from_me/{note_id}")
+  public String unshareFromMe(Map<String, Object> model, @PathVariable String note_id) {
+    // Gets user currently logged in
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User curUser = (User) principal;
+
+    Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    try {
+      connection = dataSource.getConnection();
+      stmt = connection.createStatement();
+
+      stmt.executeUpdate("DELETE FROM shares WHERE noteId='" + Long.valueOf(note_id) + "' AND shared_with_id='" + curUser.getId() + "';");
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    } finally {
+      Utils.DisposeDBHandles(connection, stmt, rs);
+    }
+    return ("redirect:/view_notes");
+  }
+
   @GetMapping(path = "/take_notes")
   public String getTakeNotes(Map<String, Object> model, HttpServletResponse response) {
     response.setHeader("Set-Cookie", "key=value;");
@@ -638,7 +662,7 @@ public class Main {
     redir.addFlashAttribute("oldNote", note);
     return new RedirectView("/take_notes", true);
   }
-  
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
