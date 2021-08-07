@@ -10,29 +10,21 @@
 <br><br>
 <div class="container" th:object="${oldNote}">
     <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
+        <div class="row" style="max-width: min-content;">
+            <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
         <input type="number" id="noteId" th:if="${oldNote}" th:value="${oldNote?.id}" hidden />
         <input type="number" id="noteId" th:unless="${oldNote}" th:value="0" hidden />
         <input type="number" id="setNoteId" th:field="${note.id}" hidden />
-        <div class="row" style="max-width: min-content;">
-            <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
-                <iframe
-                        width="725"
-                        height="595"
-                        id="getvideo"
-
-
-                        frameborder="0"
-                        style="border: solid 4px #23a3ff"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
-                >
-                </iframe>
+        
+           <div id="player"></div>
+                
                 <p th:each = "note:${noteList}">
                 <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
                     <input type="text" id="input_field" class="form-control" th:if="${oldNote}" th:value="@{'https://www.youtube.com/watch?v=' + ${oldNote?.videoId}}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px" />
                     <input type="text" id="input_field" class="form-control" th:unless="${oldNote}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px" />
                     <input type="text" id="setVideoId" th:field=${note.videoId} hidden />
                     <div class="input-group-append" >
-                        <button onclick="return loadVideo()" class="btn btn-primary" type="button">Load Video</button>
+                        <button onclick="return loadVideo2()" class="btn btn-primary" type="button">Load Video</button>
                     </div>
                 </div>
             </div>
