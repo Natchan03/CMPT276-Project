@@ -11,7 +11,7 @@
 <div class="container" th:object="${oldNote}">
     <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
         <div class="row" style="max-width: min-content;">
-            <div class="col-md-6 col-sm-6" style="padding-left: 5rem; position:relative; left:50px;" >
+            <div class="col-md-6 col-sm-6" style="padding-left: 5rem; position:relative; left: 10px;" >
         <input type="number" id="noteId" th:if="${oldNote}" th:value="${oldNote?.id}" hidden />
         <input type="number" id="noteId" th:unless="${oldNote}" th:value="0" hidden />
         <input type="number" id="setNoteId" th:field="${note.id}" hidden />
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6" style="position:relative; left:600px;">
+            <div class="col-md-6 col-sm-6" style="position:relative; left:440px;">
                 <div id="summernote"  th:utext="${oldNote?.content}"></div>
                 <input id="noteText" th:field="${note.content}" hidden />
                 <div class="input-group sm-3" style="width: 750px; position:relative; top:25px;">
