@@ -13,7 +13,6 @@
         <input type="number" id="noteId" th:if="${oldNote}" th:value="${oldNote?.id}" hidden />
         <input type="number" id="noteId" th:unless="${oldNote}" th:value="0" hidden />
         <input type="number" id="setNoteId" th:field="${note.id}" hidden />
-         th:field="${note.id}" hidden />
         <div class="row" style="max-width: min-content;">
             <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
                 <iframe
