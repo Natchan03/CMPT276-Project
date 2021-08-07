@@ -62,7 +62,7 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
    * When sharing notes Alex (user) will also have an option to make that notes editable or not by other user with whom he is sharing the notes.
    * Notes could only be shared with users who have signed up for YouNote.
   
-### Iteration 3: Users will be able to unshare their notes.
+### Iteration 3: Users can unshare the notes shared with them
 * After logging in, Alex (User) can unshare the notes shared by other users by clicking on “View Notes” on the navigation bar. This will display notes information and have unshare button. Clicking on “unShare From me” will unshare the notes which was shared by other user.
 
 ### Iteration 3: Included test cases for classes
