@@ -5,14 +5,22 @@
   <title>YouNote Notes</title>
   <th:block th:replace="fragments/common :: stylesAndScripts"></th:block>
 </head>
-
+<style>
+  .center {
+    margin: auto;
+    width: 50%;
+    height: 595;
+    border: 4px solid #9bee26;
+    padding: 10px;
+  }
+  </style>
 <body class="text">
   <nav th:replace="fragments/common :: navbar"></nav>
 
   <main>
     
-    <h2>Tutorial</h2>
-    <h4 >The Right side of the navigation bar contains 2 links:</h4>
+  
+    <!-- <h4 >The Right side of the navigation bar contains 2 links:</h4>
     <ul>  
       <li>Login: login into an account.</li>
       <li>Sign Up: sign up for an account.</li>
@@ -23,7 +31,20 @@
       <li>Take Notes: view, edit, and share your saved notes after logging in.</li>
     </ul>
     <h4 >Most website links are provided at the bottom of the page for convenience.</h4>
- 
+  -->
+  <div class="center">
+    <h2>YouNote Tutorial</h2>
+    <iframe 
+    width="890" 
+    height="595" 
+    src="https://www.youtube.com/embed/M8tqOh8T62o" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+    </iframe>
+  </div>
+
   </main>
 
   <br>
