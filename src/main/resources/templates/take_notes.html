@@ -11,15 +11,15 @@
 <div class="container" th:object="${oldNote}">
     <form action="#" method="post" th:action="@{/take_notes}" th:object="${note}">
         <div class="row" style="max-width: min-content;">
-            <div class="col-md-6 col-sm-6" style="padding-left: 5rem;" >
+            <div class="col-md-6 col-sm-6" style="padding-left: 5rem; position:relative; left:50px;" >
         <input type="number" id="noteId" th:if="${oldNote}" th:value="${oldNote?.id}" hidden />
         <input type="number" id="noteId" th:unless="${oldNote}" th:value="0" hidden />
         <input type="number" id="setNoteId" th:field="${note.id}" hidden />
         
-           <div id="player" style="width: 725px; height: 595px; border: 4px solid #23a3ff;"></div>
+           <div id="player" style="width: 750px; height: 595px; border: 4px solid #23a3ff;"></div>
                 
                 <p th:each = "note:${noteList}">
-                <div class="input-group sm-3" style="width: 725px; position: relative; top:25px;">
+                <div class="input-group sm-3" style="width: 750px; position: relative; top:25px;">
                     <input type="text" id="input_field" class="form-control" th:if="${oldNote}" th:value="@{'https://www.youtube.com/watch?v=' + ${oldNote?.videoId}}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px" />
                     <input type="text" id="input_field" class="form-control" th:unless="${oldNote}" placeholder="Enter a YouTube video URL to load video" style="margin-right:12px" />
                     <input type="text" id="setVideoId" th:field=${note.videoId} hidden />
@@ -28,10 +28,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6" style="position:relative; left:450px;">
-                <div id="summernote" th:utext="${oldNote?.content}"></div>
+            <div class="col-md-6 col-sm-6" style="position:relative; left:600px;">
+                <div id="summernote"  th:utext="${oldNote?.content}"></div>
                 <input id="noteText" th:field="${note.content}" hidden />
-                <div class="input-group sm-3" style="width: 725px; position:relative; top:25px;">
+                <div class="input-group sm-3" style="width: 750px; position:relative; top:25px;">
                     <input type="text" class="form-control" id="note_title" th:value="${oldNote?.title}" placeholder="Enter a Title for your Notes before saving" style="margin-right:12px"></input>
                     <input type="text" id="setNoteTitle" th:field="${note.title}" hidden />
                     <div class="input-group-append">

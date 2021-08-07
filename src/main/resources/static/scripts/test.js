@@ -34,7 +34,7 @@ function loadVideo() {
            if (player == undefined) {
                player = new YT.Player('player', {
                    height: '595',
-                   width: '725',
+                   width: '750',
                    videoId: videoid,
                    playerVars: {
                    'playsinline': 1
@@ -120,7 +120,7 @@ $(document).ready(function() {
         ['view', [ 'help']],
       ],
   
-        width: 725,
+        width: 750,
         height: 543, disableResizeEditor:true, placeholder:'Enter notes here'});
       });
   
