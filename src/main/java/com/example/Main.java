@@ -561,7 +561,7 @@ public class Main {
       User curUser = (User) principal;
 
       // get notes owned by the logged in user
-      rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + curUser.getId());
+      rs = stmt.executeQuery("SELECT * FROM notes WHERE ownerId = " + curUser.getId() + " ORDER BY id ASC");
       while (rs.next()) {
         Note note = new Note();
         note.setId(rs.getLong("id"));
@@ -577,7 +577,7 @@ public class Main {
       // get notes shared with logged in user
       rs2 = stmt.executeQuery(
           "SELECT n.*, s.is_editable FROM shares s JOIN notes n ON s.noteId=n.id WHERE s.shared_with_id = "
-              + curUser.getId());
+              + curUser.getId() + "ORDER BY n.id ASC");
       while (rs2.next()) {
         Note note = new Note();
         note.setId(rs2.getLong("id"));
