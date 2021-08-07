@@ -48,12 +48,8 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 ### Iteration 2: Included test cases for classes
 * Test cases were included for the User, Note, and Timestamp classes using the JUnit framework.
 
-
-## User Stories for Iteration 3
-
-### Iteration 3
-
-* Notes will be associated with a timestamp in the video.
+### Iteration 3: Notes are associated with timestamp
+* After logging in, Alex (User) can take notes by clicking on “Take Notes” on the navigation bar. Alex (User) can take notes along with video playing and the notes that user would be taking are connected with timestamp i.e if user will click on specific line of notes it will take him to that timestamp of the video of which notes have been taken.
 
 ### Iteration 3: Users can view their notes
 * After logging in, Alex (User) can view his saved notes by clicking on “View Notes” on the navigation bar. Clicking on “View” on the row for a note will take him to a view notes page where Alex(user) can view the notes he took and also if he wants he can play the video along with it for which the notes have been taken.
