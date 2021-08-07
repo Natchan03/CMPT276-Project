@@ -73,7 +73,7 @@ For what has already been implemented, Google Chrome extensions, such as “Tube
 ![alt text](mockup/Mockup-login.png)
 
 ### Mockup for Test Page
-![alt text](mockup/Mockup-test.png)
+![alt text](mockup/Mockup-takeNotes.png)
 
 ### Mockup for View Notes Page
 ![alt text](mockup/Mockup-viewNotes.png)
